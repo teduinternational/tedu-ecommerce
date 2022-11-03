@@ -27,7 +27,7 @@ public class Program
 
         try
         {
-            Log.Information("Starting TeduEcommerce.AuthServer.");
+            Log.Information("Starting TeduEcommerce.AuthServer");
             var builder = WebApplication.CreateBuilder(args);
             builder.Host.AddAppSettingsSecretsJson()
                 .UseAutofac()
