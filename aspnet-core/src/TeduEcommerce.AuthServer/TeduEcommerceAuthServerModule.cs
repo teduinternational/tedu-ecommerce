@@ -57,7 +57,7 @@ public class TeduEcommerceAuthServerModule : AbpModule
         {
             builder.AddValidation(options =>
             {
-                options.AddAudiences("TeduEcommerce");
+                options.AddAudiences("TeduEcommerce", "TeduEcommerce.Admin");
                 options.UseLocalServer();
                 options.UseAspNetCore();
             });

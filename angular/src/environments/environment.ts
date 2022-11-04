@@ -10,16 +10,17 @@ export const environment = {
     logoUrl: '',
   },
   oAuthConfig: {
-    issuer: 'https://localhost:44339/',
+    issuer: 'https://localhost:5000/',
     redirectUri: baseUrl,
-    clientId: 'TeduEcommerce_App',
+    clientId: 'TeduEcommerce_Admin',
+    client_secret:'1q2w3e*',
     responseType: 'code',
-    scope: 'offline_access TeduEcommerce',
+    scope: 'offline_access TeduEcommerce.Admin',
     requireHttps: true,
   },
   apis: {
     default: {
-      url: 'https://localhost:44351',
+      url: 'https://localhost:5001',
       rootNamespace: 'TeduEcommerce',
     },
   },

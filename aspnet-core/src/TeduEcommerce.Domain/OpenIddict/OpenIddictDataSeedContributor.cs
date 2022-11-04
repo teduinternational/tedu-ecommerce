@@ -102,7 +102,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
         if (!webAdminClientId.IsNullOrWhiteSpace())
         {
 
-            var adminWebClientRootUrl = configurationSection["TeduEcommerce_Admin:RootUrl"].EnsureEndsWith('/');
+            var adminWebClientRootUrl = configurationSection["TeduEcommerce_Admin:RootUrl"];
             await CreateApplicationAsync(
                 name: webAdminClientId,
                 type: OpenIddictConstants.ClientTypes.Confidential,
@@ -111,14 +111,15 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                 secret: configurationSection["TeduEcommerce_Admin:ClientSecret"] ?? "1q2w3e*",
                 grantTypes: new List<string> //Hybrid flow
                 {
+                    OpenIddictConstants.GrantTypes.AuthorizationCode,
                     OpenIddictConstants.GrantTypes.Password,
-                    OpenIddictConstants.GrantTypes.RefreshToken,
-                    OpenIddictConstants.GrantTypes.Implicit
+                    OpenIddictConstants.GrantTypes.ClientCredentials,
+                    OpenIddictConstants.GrantTypes.RefreshToken
                 },
                 scopes: adminScopes,
-                redirectUri: $"{adminWebClientRootUrl}signin-oidc",
+                redirectUri: adminWebClientRootUrl,
                 clientUri: adminWebClientRootUrl,
-                postLogoutRedirectUri: $"{adminWebClientRootUrl}signout-callback-oidc"
+                postLogoutRedirectUri: adminWebClientRootUrl
             );
         }
 
