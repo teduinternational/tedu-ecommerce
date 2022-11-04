@@ -229,7 +229,7 @@ public class TeduEcommerceAdminHttpApiHostModule : AbpModule
 
             var configuration = context.GetConfiguration();
             options.OAuthClientId(configuration["AuthServer:SwaggerClientId"]);
-            options.OAuthScopes("TeduEcommerce");
+            options.OAuthScopes("TeduEcommerce.Admin");
         });
 
         app.UseAuditing();

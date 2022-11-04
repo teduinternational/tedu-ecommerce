@@ -85,9 +85,15 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
             OpenIddictConstants.Permissions.Scopes.Email,
             OpenIddictConstants.Permissions.Scopes.Phone,
             OpenIddictConstants.Permissions.Scopes.Profile,
-            OpenIddictConstants.Permissions.Scopes.Roles,
-            "TeduEcommerce"
+            OpenIddictConstants.Permissions.Scopes.Roles
         };
+        var adminScopes = new List<string>();
+        adminScopes.AddRange(commonScopes);
+        adminScopes.Add("TeduEcommerce.Admin");
+
+        var clientScopes = new List<string>();
+        clientScopes.AddRange(commonScopes);
+        clientScopes.Add("TeduEcommerce");
 
         var configurationSection = _configuration.GetSection("OpenIddict:Applications");
 
@@ -95,6 +101,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
         var webAdminClientId = configurationSection["TeduEcommerce_Admin:ClientId"];
         if (!webAdminClientId.IsNullOrWhiteSpace())
         {
+
             var adminWebClientRootUrl = configurationSection["TeduEcommerce_Admin:RootUrl"].EnsureEndsWith('/');
             await CreateApplicationAsync(
                 name: webAdminClientId,
@@ -108,7 +115,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                     OpenIddictConstants.GrantTypes.RefreshToken,
                     OpenIddictConstants.GrantTypes.Implicit
                 },
-                scopes: commonScopes,
+                scopes: adminScopes,
                 redirectUri: $"{adminWebClientRootUrl}signin-oidc",
                 clientUri: adminWebClientRootUrl,
                 postLogoutRedirectUri: $"{adminWebClientRootUrl}signout-callback-oidc"
@@ -120,7 +127,7 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
         if (!webClientId.IsNullOrWhiteSpace())
         {
             var webClientRootUrl = configurationSection["TeduEcommerce_Web:RootUrl"].EnsureEndsWith('/');
-
+            
             /* TeduEcommerce_Web client is only needed if you created a tiered
              * solution. Otherwise, you can delete this client. */
             await CreateApplicationAsync(
@@ -134,10 +141,31 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                     OpenIddictConstants.GrantTypes.AuthorizationCode,
                     OpenIddictConstants.GrantTypes.Implicit
                 },
-                scopes: commonScopes,
+                scopes: clientScopes,
                 redirectUri: $"{webClientRootUrl}signin-oidc",
                 clientUri: webClientRootUrl,
                 postLogoutRedirectUri: $"{webClientRootUrl}signout-callback-oidc"
+            );
+        }
+
+        // Swagger Client
+        var swaggerClientId = configurationSection["TeduEcommerce_Admin_Swagger:ClientId"];
+        if (!swaggerClientId.IsNullOrWhiteSpace())
+        {
+            var swaggerRootUrl = configurationSection["TeduEcommerce_Admin_Swagger:RootUrl"].TrimEnd('/');
+            await CreateApplicationAsync(
+                name: swaggerClientId,
+                type: OpenIddictConstants.ClientTypes.Public,
+                consentType: OpenIddictConstants.ConsentTypes.Implicit,
+                displayName: "Swagger Admin Application",
+                secret: null,
+                grantTypes: new List<string>
+                {
+                    OpenIddictConstants.GrantTypes.AuthorizationCode,
+                },
+                scopes: adminScopes,
+                redirectUri: $"{swaggerRootUrl}/swagger/oauth2-redirect.html",
+                clientUri: swaggerRootUrl
             );
         }
     }
