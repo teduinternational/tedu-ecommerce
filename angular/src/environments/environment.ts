@@ -6,21 +6,21 @@ export const environment = {
   production: false,
   application: {
     baseUrl,
-    name: 'TeduEcommerce',
+    name: 'TeduEcommerce Admin',
     logoUrl: '',
   },
   oAuthConfig: {
-    issuer: 'https://localhost:44339/',
+    issuer: 'https://localhost:5000/',
     redirectUri: baseUrl,
-    clientId: 'TeduEcommerce_App',
+    clientId: 'TeduEcommerce_Admin',
     responseType: 'code',
-    scope: 'offline_access TeduEcommerce',
+    scope: 'offline_access TeduEcommerce.Admin',
     requireHttps: true,
   },
   apis: {
     default: {
-      url: 'https://localhost:44351',
-      rootNamespace: 'TeduEcommerce',
+      url: 'https://localhost:5001',
+      rootNamespace: 'TeduEcommerce.Admin',
     },
   },
 } as Environment;
