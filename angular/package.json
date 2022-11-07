@@ -32,7 +32,11 @@
     "bootstrap-icons": "~1.8.3",
     "rxjs": "7.5.6",
     "tslib": "^2.1.0",
-    "zone.js": "~0.11.4"
+    "zone.js": "~0.11.4",
+    "primeflex": "^3.2.0",
+    "primeicons": "5.0.0",
+    "primeng": "14.0.2",
+    "prismjs": "1.9.0"
   },
   "devDependencies": {
     "@abp/ng.schematics": "~6.0.0",
