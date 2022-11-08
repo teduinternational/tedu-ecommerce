@@ -10,14 +10,14 @@
                     <span class="text-600 font-medium">Đăng nhập</span>
                 </div>
 
-                <div class="w-full md:w-10 mx-auto">
+                <div class="w-full md:w-10 mx-auto" [formGroup]="loginForm">
                     <label for="email1" class="block text-900 text-xl font-medium mb-2">Email</label>
-                    <input id="email1" type="text" placeholder="Email address" pInputText class="w-full mb-3" style="padding:1rem;">
+                    <input id="email1" formControlName="username" type="text" placeholder="Địa chỉ email" pInputText class="w-full mb-3" style="padding:1rem;">
 
                     <label for="password1" class="block text-900 font-medium text-xl mb-2">Mật khẩu</label>
-                    <p-password id="password1" [(ngModel)]="password" placeholder="Password" [toggleMask]="true" styleClass="w-full mb-3"></p-password>
+                    <p-password id="password1" formControlName="password" placeholder="Mật khẩu" [toggleMask]="true" styleClass="w-full mb-3"></p-password>
 
-                    <button pButton pRipple label="Đăng nhập" class="w-full p-3 text-xl"></button>
+                    <button pButton pRipple (click)="login()" label="Đăng nhập" class="w-full p-3 text-xl"></button>
                 </div>
             </div>
         </div>
