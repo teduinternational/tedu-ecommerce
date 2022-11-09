@@ -15,5 +15,7 @@ namespace TeduEcommerce.Admin.ProductCategories
         CreateUpdateProductCategoryDto>
     {
         Task<PagedResultDto<ProductCategoryInListDto>> GetListFilterAsync(BaseListFilterDto input);
+        Task<List<ProductCategoryInListDto>> GetListAllAsync();
+        Task DeleteMultipleAsync(IEnumerable<Guid> ids);
     }
 }
