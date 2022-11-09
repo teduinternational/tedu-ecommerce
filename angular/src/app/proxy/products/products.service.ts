@@ -1,8 +1,7 @@
-import type { CreateUpdateProductDto, ProductDto, ProductInListDto } from './models';
+import type { CreateUpdateProductDto, ProductDto, ProductInListDto, ProductListFilterDto } from './models';
 import { RestService } from '@abp/ng.core';
 import type { PagedResultDto, PagedResultRequestDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
-import type { BaseListFilterDto } from '../models';
 
 @Injectable({
   providedIn: 'root',
@@ -62,11 +61,11 @@ export class ProductsService {
     { apiName: this.apiName });
   
 
-  getListFilter = (input: BaseListFilterDto) =>
+  getListFilter = (input: ProductListFilterDto) =>
     this.restService.request<any, PagedResultDto<ProductInListDto>>({
       method: 'GET',
       url: '/api/app/products/filter',
-      params: { keyword: input.keyword, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
+      params: { categoryId: input.categoryId, keyword: input.keyword, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
     },
     { apiName: this.apiName });
   

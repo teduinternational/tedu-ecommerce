@@ -1,8 +1,32 @@
 <p-panel header="Danh sách sản phẩm">
   <!--Filter (search panel)-->
   <div class="grid">
-    <div class="col-4">4</div>
-    <div class="col-8">8</div>
+    <div class="col-4">
+      <button pButton type="button" icon="fa fa-plus" iconPos="left" label="Thêm mới"></button>
+    </div>
+    <div class="col-8">
+      <div class="formgroup-inline">
+        <div class="field">
+          <label for="txt-keyword"  class="p-sr-only">Từ khóa</label>
+          <input id="txt-keyword" pInputText type="text" placeholder="Gõ từ khóa" />
+        </div>
+        <div class="field">
+          <p-dropdown
+            [options]="productCategories"
+            [(ngModel)]="categoryId"
+            placeholder="Chọn danh mục"
+          ></p-dropdown>
+        </div>
+        <button
+          type="button"
+          pButton
+          (click)="loadData()"
+          icon="fa fa-search"
+          iconPos="left"
+          label="Tìm"
+        ></button>
+      </div>
+    </div>
   </div>
 
   <!--Table-->
@@ -36,7 +60,12 @@
     </ng-template>
   </p-table>
   <!--Paginator-->
-  <p-paginator [rows]="maxResultCount" [totalRecords]="totalCount" (onPageChange)="pageChanged($event)" [rowsPerPageOptions]="[10, 20, 30, 50, 100]"></p-paginator>
+  <p-paginator
+    [rows]="maxResultCount"
+    [totalRecords]="totalCount"
+    (onPageChange)="pageChanged($event)"
+    [rowsPerPageOptions]="[10, 20, 30, 50, 100]"
+  ></p-paginator>
   <!--Block UI-->
   <p-blockUI [blocked]="blockedPanel" [target]="pnl"></p-blockUI>
 </p-panel>

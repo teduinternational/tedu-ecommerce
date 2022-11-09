@@ -66,7 +66,7 @@ export class ProductCategoriesService {
     this.restService.request<any, PagedResultDto<ProductCategoryInListDto>>({
       method: 'GET',
       url: '/api/app/product-categories/filter',
-      params: { keyword: input.keyword, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
+      params: { skipCount: input.skipCount, maxResultCount: input.maxResultCount, keyword: input.keyword },
     },
     { apiName: this.apiName });
   
