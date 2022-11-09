@@ -36,6 +36,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
 
   loadData() {
+    this.toggleBlockUI(true);
     this.productService
       .getListFilter({
         keyword: this.keyword,
@@ -48,8 +49,13 @@ export class ProductComponent implements OnInit, OnDestroy {
         next: (response: PagedResultDto<ProductInListDto>) => {
           this.items = response.items;
           this.totalCount = response.totalCount;
+          this.toggleBlockUI(false);
+
         },
-        error: () => {},
+        error: () => {
+          this.toggleBlockUI(false);
+
+        },
       });
   }
 
@@ -69,5 +75,15 @@ export class ProductComponent implements OnInit, OnDestroy {
     this.skipCount = (event.page -1) * this.maxResultCount;
     this.maxResultCount = event.rows;
     this.loadData();
+  }
+
+  private toggleBlockUI(enabled: boolean){
+    if(enabled == true){
+      this.blockedPanel = true;
+    }else{
+      setTimeout(()=>{
+        this.blockedPanel = false;
+      },1000);
+    }
   }
 }
