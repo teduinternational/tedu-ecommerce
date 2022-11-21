@@ -1,0 +1,18 @@
+<form [formGroup]="form" (ngSubmit)="saveChange()">
+  <p-panel #pnl header="Danh sách sản phẩm">
+    <!--form grid-->
+    <div class="formgrid grid">
+      <div class="field col-12">
+        <label for="name"  class="block">Tên</label>
+        <input id="name" pInputText type="text" formControlName="name"ð/>
+      </div>
+    </div>
+    <ng-template pTemplate="footer">
+      <button type="submit" pButton icon="fa fa-save" iconPos="left" label="Lưu lại"></button>
+    </ng-template>
+    <!--Block UI-->
+    <p-blockUI [blocked]="blockedPanel" [target]="pnl">
+      <p-progressSpinner></p-progressSpinner>
+    </p-blockUI>
+  </p-panel>
+</form>
