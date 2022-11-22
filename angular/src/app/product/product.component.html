@@ -2,12 +2,29 @@
   <!--Filter (search panel)-->
   <div class="grid">
     <div class="col-4">
-      <button pButton type="button" (click)="showAddModal()" icon="fa fa-plus" iconPos="left" label="Thêm mới"></button>
+      <button
+        pButton
+        type="button"
+        (click)="showAddModal()"
+        icon="fa fa-plus"
+        iconPos="left"
+        label="Thêm"
+      ></button>
+      <button
+        pButton
+        type="button"
+        (click)="showEditModal()"
+        *ngIf="selectedItems.length == 1"
+        class="ml-1 p-button-help"
+        icon="fa fa-minus"
+        iconPos="left"
+        label="Sửa"
+      ></button>
     </div>
     <div class="col-8">
       <div class="formgroup-inline">
         <div class="field">
-          <label for="txt-keyword"  class="p-sr-only">Từ khóa</label>
+          <label for="txt-keyword" class="p-sr-only">Từ khóa</label>
           <input id="txt-keyword" pInputText type="text" placeholder="Gõ từ khóa" />
         </div>
         <div class="field">
@@ -30,9 +47,12 @@
   </div>
 
   <!--Table-->
-  <p-table #pnl [value]="items">
+  <p-table #pnl [value]="items" [(selection)]="selectedItems">
     <ng-template pTemplate="header">
       <tr>
+        <th style="width: 10px">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
         <th>Mã</th>
         <th>SKU</th>
         <th>Tên</th>
@@ -45,14 +65,24 @@
     </ng-template>
     <ng-template pTemplate="body" let-row>
       <tr>
+        <td style="width: 10px">
+          <span class="ui-column-title"></span>
+          <p-tableCheckbox [value]="row"></p-tableCheckbox>
+        </td>
         <td>{{ row.code }}</td>
         <td>{{ row.sku }}</td>
         <td>{{ row.name }}</td>
         <td>{{ row.productType }}</td>
         <td>{{ row.categoryId }}</td>
         <td>{{ row.sortOrder }}</td>
-        <td>{{ row.visibility }}</td>
-        <td>{{ row.isActive }}</td>
+        <td>
+          <p-badge *ngIf="row.visibility == 1" severity="success" value="Hiển thị"></p-badge>
+          <p-badge *ngIf="row.visibility == 0" severity="danger" value="Ẩn"></p-badge>
+        </td>
+        <td>
+          <p-badge *ngIf="row.isActive == 1" value="Kích hoạt" severity="success"></p-badge>
+          <p-badge *ngIf="row.isActive == 0" value="Khoá" severity="danger"></p-badge>
+        </td>
       </tr>
     </ng-template>
     <ng-template pTemplate="summary">
