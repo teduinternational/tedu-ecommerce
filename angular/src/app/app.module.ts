@@ -18,6 +18,7 @@ import { AppLayoutModule } from './layout/app.layout.module';
 import { APP_ROUTE_PROVIDER } from './route.provider';
 import { MessageService } from 'primeng/api';
 import { NotificationService } from './shared/services/notification.service';
+import { UtilityService } from './shared/services/utility.service';
 
 @NgModule({
   imports: [
@@ -38,7 +39,7 @@ import { NotificationService } from './shared/services/notification.service';
     SideMenuLayoutModule.forRoot(),
   ],
   declarations: [AppComponent],
-  providers: [APP_ROUTE_PROVIDER, DialogService, MessageService, NotificationService],
+  providers: [APP_ROUTE_PROVIDER, DialogService, MessageService, NotificationService, UtilityService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
