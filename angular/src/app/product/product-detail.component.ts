@@ -6,6 +6,7 @@ import { ProductDto, ProductsService } from '@proxy/products';
 import { ProductType, productTypeOptions } from '@proxy/tedu-ecommerce/products';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { forkJoin, Subject, takeUntil } from 'rxjs';
+import { NotificationService } from '../shared/services/notification.service';
 import { UtilityService } from '../shared/services/utility.service';
 
 @Component({
@@ -31,7 +32,8 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private config: DynamicDialogConfig,
     private ref: DynamicDialogRef,
-    private utilService: UtilityService
+    private utilService: UtilityService,
+    private notificationSerivce: NotificationService
   ) {}
 
   validationMessages = {
@@ -131,7 +133,9 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
             this.ref.close(this.form.value);
           },
-          error: () => {
+          error: (err) => {
+            this.notificationSerivce.showError(err.error.error.message);
+
             this.toggleBlockUI(false);
           },
         });
@@ -144,7 +148,8 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
             this.toggleBlockUI(false);
             this.ref.close(this.form.value);
           },
-          error: () => {
+          error: (err) => {
+            this.notificationSerivce.showError(err.error.error.message);
             this.toggleBlockUI(false);
           },
         });

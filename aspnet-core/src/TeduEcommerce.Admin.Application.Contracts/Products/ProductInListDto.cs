@@ -20,7 +20,7 @@ namespace TeduEcommerce.Admin.Products
         public Guid CategoryId { get; set; }
         public string ThumbnailPicture { get; set; }
 
-        public string CreategoryName { get; set; }
-        public string CreategorySlug { get; set; }
+        public string CategoryName { get; set; }
+        public string CategorySlug { get; set; }
     }
 }
