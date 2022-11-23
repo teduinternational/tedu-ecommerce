@@ -1,0 +1,147 @@
+<form [formGroup]="form" skipValidation (ngSubmit)="saveChange()">
+  <p-panel #pnl header="Danh sách sản phẩm">
+    <!--form grid-->
+    <div class="formgrid grid">
+      <div class="field col-12">
+        <label for="name" class="block">Tên <span class="required">*</span></label>
+        <input id="name" pInputText (keyup)="generateSlug()" type="text" class="w-full" formControlName="name" />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="name"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+      <div class="field col-12">
+        <label for="code" class="block">Code <span class="required">*</span></label>
+        <input id="code" pInputText type="text" formControlName="code" />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="code"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+      <div class="field col-12">
+        <label for="slug" class="block">Slug <span class="required">*</span></label>
+        <input id="slug" pInputText type="text" class="w-full" formControlName="slug" />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="slug"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+      <div class="field col-12">
+        <label for="sku" class="block">SKU <span class="required">*</span></label>
+        <input id="sku" pInputText type="text" class="w-full" formControlName="sku" />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="sku"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+      <div class="field col-12">
+        <label for="manufacturerId" class="block"
+          >Nhà sản xuất <span class="required">*</span></label
+        >
+        <p-dropdown
+          [options]="manufacturers"
+          formControlName="manufacturerId"
+          placeholder="Chọn nhà sản xuất"
+          [showClear]="true"
+          autoWidth="false"
+          [style]="{ width: '100%' }"
+        ></p-dropdown>
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="manufacturerId"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+      <div class="field col-12">
+        <label for="categoryId" class="block">Danh mục <span class="required">*</span></label>
+        <p-dropdown
+          [options]="productCategories"
+          formControlName="categoryId"
+          placeholder="Chọn danh mục"
+          [showClear]="true"
+          autoWidth="false"
+          [style]="{ width: '100%' }"
+        ></p-dropdown>
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="categoryId"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+      <div class="field col-12">
+        <label for="productType" class="block">Loại sản phẩm <span class="required">*</span></label>
+        <p-dropdown
+          [options]="productTypes"
+          formControlName="productType"
+          placeholder="Chọn loại"
+          [showClear]="true"
+          autoWidth="false"
+          [style]="{ width: '100%' }"
+        ></p-dropdown>
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="productType"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+      <div class="field col-12">
+        <label for="slug" class="block">Thứ tự <span class="required">*</span></label>
+        <p-inputNumber formControlName="sortOrder"></p-inputNumber>
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="sortOrder"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+      <div class="field col-12">
+        <label for="sellPrice" class="block">Giá bán <span class="required">*</span></label>
+        <p-inputNumber formControlName="sellPrice"></p-inputNumber>
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="sellPrice"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+      <div class="field-checkbox col-12 md:col-3">
+        <p-checkbox formControlName="visibility" binary="true" id="visibility"></p-checkbox>
+        <label for="visibility">Hiển thị</label>
+      </div>
+      <div class="field-checkbox col-12 md:col-3">
+        <p-checkbox formControlName="isActive" binary="true" id="isActive"></p-checkbox>
+        <label for="isActive">Kích hoạt</label>
+      </div>
+
+      <div class="field col-12">
+        <label for="seoMetaDescription" class="block">Mô tả SEO</label>
+        <textarea
+          id="seoMetaDescription"
+          pInputTextarea
+          class="w-full"
+          formControlName="seoMetaDescription"
+        ></textarea>
+      </div>
+      <div class="field col-12">
+        <label for="description" class="block">Mô tả</label>
+        <p-editor formControlName="description" [style]="{ height: '320px' }"></p-editor>
+      </div>
+    </div>
+    <ng-template pTemplate="footer">
+      <button
+        type="submit"
+        [disabled]="!form.valid || btnDisabled"
+        pButton
+        icon="fa fa-save"
+        iconPos="left"
+        label="Lưu lại"
+      ></button>
+    </ng-template>
+    <!--Block UI-->
+    <p-blockUI [blocked]="blockedPanel" [target]="pnl">
+      <p-progressSpinner></p-progressSpinner>
+    </p-blockUI>
+  </p-panel>
+</form>

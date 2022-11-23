@@ -1,0 +1,103 @@
+<p-panel header="Danh sách sản phẩm">
+  <!--Filter (search panel)-->
+  <div class="grid">
+    <div class="col-4">
+      <button
+        pButton
+        type="button"
+        (click)="showAddModal()"
+        icon="fa fa-plus"
+        iconPos="left"
+        label="Thêm"
+      ></button>
+      <button
+        pButton
+        type="button"
+        (click)="showEditModal()"
+        *ngIf="selectedItems.length == 1"
+        class="ml-1 p-button-help"
+        icon="fa fa-minus"
+        iconPos="left"
+        label="Sửa"
+      ></button>
+    </div>
+    <div class="col-8">
+      <div class="formgroup-inline">
+        <div class="field">
+          <label for="txt-keyword" class="p-sr-only">Từ khóa</label>
+          <input id="txt-keyword" pInputText type="text" placeholder="Gõ từ khóa" />
+        </div>
+        <div class="field">
+          <p-dropdown
+            [options]="productCategories"
+            [(ngModel)]="categoryId"
+            placeholder="Chọn danh mục"
+          ></p-dropdown>
+        </div>
+        <button
+          type="button"
+          pButton
+          (click)="loadData()"
+          icon="fa fa-search"
+          iconPos="left"
+          label="Tìm"
+        ></button>
+      </div>
+    </div>
+  </div>
+
+  <!--Table-->
+  <p-table #pnl [value]="items" [(selection)]="selectedItems" selectionMode="multiple">
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 10px">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th>Mã</th>
+        <th>SKU</th>
+        <th>Tên</th>
+        <th>Loại</th>
+        <th>Tên danh mục</th>
+        <th>Thứ tự</th>
+        <th>Hiển thị</th>
+        <th>Kích hoạt</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-row>
+      <tr [pSelectableRow]="row">
+        <td style="width: 10px">
+          <span class="ui-column-title"></span>
+          <p-tableCheckbox [value]="row"></p-tableCheckbox>
+        </td>
+        <td>{{ row.code }}</td>
+        <td>{{ row.sku }}</td>
+        <td>{{ row.name }}</td>
+        <td>{{ getProductTypeName(row.productType) }}</td>
+        <td>{{ row.categoryName }}</td>
+        <td>{{ row.sortOrder }}</td>
+        <td>
+          <p-badge *ngIf="row.visibility == 1" severity="success" value="Hiển thị"></p-badge>
+          <p-badge *ngIf="row.visibility == 0" severity="danger" value="Ẩn"></p-badge>
+        </td>
+        <td>
+          <p-badge *ngIf="row.isActive == 1" value="Kích hoạt" severity="success"></p-badge>
+          <p-badge *ngIf="row.isActive == 0" value="Khoá" severity="danger"></p-badge>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div style="text-align: left">Tổng số bản ghi: {{ totalCount | number }}</div>
+    </ng-template>
+  </p-table>
+  <!--Paginator-->
+  <p-paginator
+    [rows]="maxResultCount"
+    [totalRecords]="totalCount"
+    (onPageChange)="pageChanged($event)"
+    [rowsPerPageOptions]="[10, 20, 30, 50, 100]"
+  ></p-paginator>
+  <!--Block UI-->
+  <p-blockUI [blocked]="blockedPanel" [target]="pnl">
+    <p-progressSpinner></p-progressSpinner>
+  </p-blockUI>
+</p-panel>

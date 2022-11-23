@@ -10,16 +10,22 @@ import { ThemeSharedModule } from '@abp/ng.theme.shared';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DialogService } from 'primeng/dynamicdialog';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AppLayoutModule } from './layout/app.layout.module';
 import { APP_ROUTE_PROVIDER } from './route.provider';
+import { MessageService } from 'primeng/api';
+import { NotificationService } from './shared/services/notification.service';
+import { UtilityService } from './shared/services/utility.service';
 
 @NgModule({
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    AppLayoutModule,
     CoreModule.forRoot({
       environment,
       registerLocaleFn: registerLocale(),
@@ -33,7 +39,7 @@ import { APP_ROUTE_PROVIDER } from './route.provider';
     SideMenuLayoutModule.forRoot(),
   ],
   declarations: [AppComponent],
-  providers: [APP_ROUTE_PROVIDER],
+  providers: [APP_ROUTE_PROVIDER, DialogService, MessageService, NotificationService, UtilityService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
