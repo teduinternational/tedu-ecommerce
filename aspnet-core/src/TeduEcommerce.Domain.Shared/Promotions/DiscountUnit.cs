@@ -6,7 +6,7 @@ namespace TeduEcommerce.Promotions
 {
     public enum DiscountUnit
     {
-        MoneyAmount,
-        Percentage
+        MoneyAmount = 1,
+        Percentage = 2
     }
 }

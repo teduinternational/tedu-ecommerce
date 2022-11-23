@@ -2,6 +2,7 @@ import { PagedResultDto } from '@abp/ng.core';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProductCategoriesService, ProductCategoryInListDto } from '@proxy/product-categories';
 import { ProductDto, ProductInListDto, ProductsService } from '@proxy/products';
+import { ProductType } from '@proxy/tedu-ecommerce/products';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Subject, takeUntil } from 'rxjs';
 import { NotificationService } from '../shared/services/notification.service';
@@ -119,6 +120,11 @@ export class ProductComponent implements OnInit, OnDestroy {
         this.notificationService.showSuccess('Thêm sản phẩm thành công');
       }
     });
+  }
+
+  
+  getProductTypeName(value: number){
+    return ProductType[value];
   }
 
   private toggleBlockUI(enabled: boolean) {

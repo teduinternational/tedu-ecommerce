@@ -24,5 +24,8 @@ namespace TeduEcommerce.Products
         public string ThumbnailPicture { get; set; }
         public double SellPrice { get; set; }
 
+        public string CreategoryName { get; set; }
+        public string CreategorySlug { get; set; }
+
     }
 }

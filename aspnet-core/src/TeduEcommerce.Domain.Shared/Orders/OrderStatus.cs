@@ -6,11 +6,11 @@ namespace TeduEcommerce.Orders
 {
     public enum OrderStatus
     {
-        New,
-        Confirmed,
-        Processing,
-        Shipping,
-        Finished,
-        Canceled
+        New =1,
+        Confirmed = 2,
+        Processing = 3,
+        Shipping = 4,
+        Finished  = 5,
+        Canceled = 6
     }
 }

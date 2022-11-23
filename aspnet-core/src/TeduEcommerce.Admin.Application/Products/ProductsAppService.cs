@@ -22,6 +22,16 @@ namespace TeduEcommerce.Admin.Products
         {
         }
 
+        public override Task<ProductDto> CreateAsync(CreateUpdateProductDto input)
+        {
+            return base.CreateAsync(input);
+        }
+
+        public override Task<ProductDto> UpdateAsync(Guid id, CreateUpdateProductDto input)
+        {
+            return base.UpdateAsync(id, input);
+        }
+
         public async Task DeleteMultipleAsync(IEnumerable<Guid> ids)
         {
             await Repository.DeleteManyAsync(ids);

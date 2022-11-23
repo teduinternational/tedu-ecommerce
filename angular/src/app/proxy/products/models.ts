@@ -35,6 +35,8 @@ export interface ProductDto {
   thumbnailPicture?: string;
   sellPrice: number;
   id?: string;
+  creategoryName?: string;
+  creategorySlug?: string;
 }
 
 export interface ProductInListDto extends EntityDto<string> {
@@ -49,6 +51,8 @@ export interface ProductInListDto extends EntityDto<string> {
   isActive: boolean;
   categoryId?: string;
   thumbnailPicture?: string;
+  creategoryName?: string;
+  creategorySlug?: string;
 }
 
 export interface ProductListFilterDto extends BaseListFilterDto {

@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ManufacturerInListDto, ManufacturersService } from '@proxy/manufacturers';
 import { ProductCategoriesService, ProductCategoryInListDto } from '@proxy/product-categories';
 import { ProductDto, ProductsService } from '@proxy/products';
-import { productTypeOptions } from '@proxy/tedu-ecommerce/products';
+import { ProductType, productTypeOptions } from '@proxy/tedu-ecommerce/products';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { forkJoin, Subject, takeUntil } from 'rxjs';
 import { UtilityService } from '../shared/services/utility.service';
