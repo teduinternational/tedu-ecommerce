@@ -1,5 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ManufacturerInListDto, ManufacturersService } from '@proxy/manufacturers';
 import { ProductCategoriesService, ProductCategoryInListDto } from '@proxy/product-categories';
 import { ProductDto, ProductsService } from '@proxy/products';
@@ -18,6 +19,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
   blockedPanel: boolean = false;
   btnDisabled = false;
   public form: FormGroup;
+  public thumbnailImage;
 
   //Dropdown
   productCategories: any[] = [];
@@ -33,7 +35,9 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     private config: DynamicDialogConfig,
     private ref: DynamicDialogRef,
     private utilService: UtilityService,
-    private notificationSerivce: NotificationService
+    private notificationSerivce: NotificationService,
+    private cd: ChangeDetectorRef,
+    private sanitizer: DomSanitizer
   ) {}
 
   validationMessages = {
@@ -51,7 +55,14 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     sellPrice: [{ type: 'required', message: 'Bạn phải nhập giá bán' }],
   };
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    if (this.ref) {
+        this.ref.close();
+      }
+      this.ngUnsubscribe.next();
+      this.ngUnsubscribe.complete();
+    
+  }
 
   ngOnInit(): void {
     this.buildForm();
@@ -112,6 +123,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (response: ProductDto) => {
           this.selectedEntity = response;
+          this.loadThumbnail(this.selectedEntity.thumbnailPicture);
           this.buildForm();
           this.toggleBlockUI(false);
         },
@@ -120,6 +132,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
         },
       });
   }
+
   saveChange() {
     this.toggleBlockUI(true);
 
@@ -133,7 +146,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
             this.ref.close(this.form.value);
           },
-          error: (err) => {
+          error: err => {
             this.notificationSerivce.showError(err.error.error.message);
 
             this.toggleBlockUI(false);
@@ -148,7 +161,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
             this.toggleBlockUI(false);
             this.ref.close(this.form.value);
           },
-          error: (err) => {
+          error: err => {
             this.notificationSerivce.showError(err.error.error.message);
             this.toggleBlockUI(false);
           },
@@ -186,6 +199,21 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
       isActive: new FormControl(this.selectedEntity.isActive || true),
       seoMetaDescription: new FormControl(this.selectedEntity.seoMetaDescription || null),
       description: new FormControl(this.selectedEntity.description || null),
+      thumbnailPictureName:new FormControl(this.selectedEntity.description || null),
+      thumbnailPictureContent: new FormControl(null)
+    });
+  }
+
+  loadThumbnail(fileName: string){
+    this.productService.getThumbnailImage(fileName)
+    .pipe(takeUntil(this.ngUnsubscribe))
+    .subscribe({
+      next: (response: string) => {
+        var fileExt = this.selectedEntity.thumbnailPicture?.split('.').pop();
+        this.thumbnailImage = this.sanitizer.bypassSecurityTrustResourceUrl(
+          `data:image/${fileExt};base64, ${response}`
+        );
+      },
     });
   }
 
@@ -198,6 +226,24 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
         this.blockedPanel = false;
         this.btnDisabled = false;
       }, 1000);
+    }
+  }
+
+  onFileChange(event){
+    const reader = new FileReader();
+
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.form.patchValue({
+          thumbnailPictureName: file.name,
+          thumbnailPictureContent: reader.result,
+        });
+
+        // need to run CD since file load runs outside of zone
+        this.cd.markForCheck();
+      };
     }
   }
 }
