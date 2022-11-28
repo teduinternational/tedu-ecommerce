@@ -11,6 +11,7 @@ import { LoginResponseDto } from '../models/login-response.dto';
 })
 export class AuthService {
   constructor(private httpClient: HttpClient) {}
+
   public login(input: LoginRequestDto): Observable<LoginResponseDto> {
     var body = {
       username: input.username,
@@ -19,6 +20,22 @@ export class AuthService {
       client_secret: environment.oAuthConfig.dummyClientSecret,
       grant_type: 'password',
       scope: environment.oAuthConfig.scope
+    };
+
+    const data = Object.keys(body).map((key, index) => `${key}=${encodeURIComponent(body[key])}`).join('&');
+    return this.httpClient.post<LoginResponseDto>(
+      environment.oAuthConfig.issuer + 'connect/token',
+      data,
+      { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
+    );
+  }
+
+  public refreshToken(refreshToken: string): Observable<LoginResponseDto> {
+    var body = {
+      client_id: environment.oAuthConfig.clientId,
+      client_secret: environment.oAuthConfig.dummyClientSecret,
+      grant_type: 'refresh_token',
+      refresh_token: refreshToken
     };
 
     const data = Object.keys(body).map((key, index) => `${key}=${encodeURIComponent(body[key])}`).join('&');
