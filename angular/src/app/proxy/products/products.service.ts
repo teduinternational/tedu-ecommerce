@@ -70,6 +70,15 @@ export class ProductsService {
     { apiName: this.apiName });
   
 
+  getSuggestNewCode = () =>
+    this.restService.request<any, string>({
+      method: 'GET',
+      responseType: 'text',
+      url: '/api/app/products/suggest-new-code',
+    },
+    { apiName: this.apiName });
+  
+
   getThumbnailImage = (fileName: string) =>
     this.restService.request<any, string>({
       method: 'GET',

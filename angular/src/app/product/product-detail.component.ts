@@ -57,11 +57,10 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.ref) {
-        this.ref.close();
-      }
-      this.ngUnsubscribe.next();
-      this.ngUnsubscribe.complete();
-    
+      this.ref.close();
+    }
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   ngOnInit(): void {
@@ -104,6 +103,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
           });
           //Load edit data to form
           if (this.utilService.isEmpty(this.config.data?.id) == true) {
+            this.getNewSuggestionCode();
             this.toggleBlockUI(false);
           } else {
             this.loadFormDetails(this.config.data?.id);
@@ -112,6 +112,19 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
         error: () => {
           this.toggleBlockUI(false);
         },
+      });
+  }
+
+  getNewSuggestionCode() {
+    this.productService
+      .getSuggestNewCode()
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (response: string) => {
+          this.form.patchValue({
+            code: response,
+          });
+        }
       });
   }
 
@@ -199,22 +212,23 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
       isActive: new FormControl(this.selectedEntity.isActive || true),
       seoMetaDescription: new FormControl(this.selectedEntity.seoMetaDescription || null),
       description: new FormControl(this.selectedEntity.description || null),
-      thumbnailPictureName:new FormControl(this.selectedEntity.description || null),
-      thumbnailPictureContent: new FormControl(null)
+      thumbnailPictureName: new FormControl(this.selectedEntity.description || null),
+      thumbnailPictureContent: new FormControl(null),
     });
   }
 
-  loadThumbnail(fileName: string){
-    this.productService.getThumbnailImage(fileName)
-    .pipe(takeUntil(this.ngUnsubscribe))
-    .subscribe({
-      next: (response: string) => {
-        var fileExt = this.selectedEntity.thumbnailPicture?.split('.').pop();
-        this.thumbnailImage = this.sanitizer.bypassSecurityTrustResourceUrl(
-          `data:image/${fileExt};base64, ${response}`
-        );
-      },
-    });
+  loadThumbnail(fileName: string) {
+    this.productService
+      .getThumbnailImage(fileName)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (response: string) => {
+          var fileExt = this.selectedEntity.thumbnailPicture?.split('.').pop();
+          this.thumbnailImage = this.sanitizer.bypassSecurityTrustResourceUrl(
+            `data:image/${fileExt};base64, ${response}`
+          );
+        },
+      });
   }
 
   private toggleBlockUI(enabled: boolean) {
@@ -229,7 +243,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
     }
   }
 
-  onFileChange(event){
+  onFileChange(event) {
     const reader = new FileReader();
 
     if (event.target.files && event.target.files.length) {
