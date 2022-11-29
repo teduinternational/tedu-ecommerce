@@ -1,0 +1,87 @@
+<form [formGroup]="form" skipValidation (ngSubmit)="saveChange()">
+  <p-panel #pnl header="Chi tiết thuộc tính">
+    <!--form grid-->
+    <div class="formgrid grid">
+      <div class="field col-12">
+        <label for="label" class="block">Nhãn <span class="required">*</span></label>
+        <input id="label" pInputText type="text" class="w-full" formControlName="label" />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="label"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+      <div class="field col-12">
+        <label for="code" class="block">Code <span class="required">*</span></label>
+        <input id="code" pInputText type="text" formControlName="code" />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="code"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+
+      <div class="field col-12">
+        <label for="productType" class="block">Kiểu dữ liệu <span class="required">*</span></label>
+        <p-dropdown
+          [options]="dataTypes"
+          formControlName="dataType"
+          placeholder="Chọn kiểu dữ liệu"
+          [showClear]="true"
+          autoWidth="false"
+          [style]="{ width: '100%' }"
+        ></p-dropdown>
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="dataType"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+      <div class="field col-12">
+        <label for="slug" class="block">Thứ tự <span class="required">*</span></label>
+        <p-inputNumber formControlName="sortOrder"></p-inputNumber>
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="sortOrder"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+
+      <div class="field-checkbox col-12 md:col-3">
+        <p-checkbox formControlName="visibility" binary="true" id="visibility"></p-checkbox>
+        <label for="visibility">Hiển thị</label>
+      </div>
+      <div class="field-checkbox col-12 md:col-3">
+        <p-checkbox formControlName="isActive" binary="true" id="isActive"></p-checkbox>
+        <label for="isActive">Kích hoạt</label>
+      </div>
+      <div class="field-checkbox col-12 md:col-3">
+        <p-checkbox formControlName="isRequired" binary="true" id="isRequired"></p-checkbox>
+        <label for="isRequired">Bắt buộc nhập</label>
+      </div>
+      <div class="field-checkbox col-12 md:col-3">
+        <p-checkbox formControlName="isUnique" binary="true" id="isUnique"></p-checkbox>
+        <label for="isUnique">Duy nhất</label>
+      </div>
+
+      <div class="field col-12">
+        <label for="note" class="block">Ghi chú</label>
+        <textarea id="note" pInputTextarea class="w-full" formControlName="note"></textarea>
+      </div>
+    </div>
+    <ng-template pTemplate="footer">
+      <button
+        type="submit"
+        [disabled]="!form.valid || btnDisabled"
+        pButton
+        icon="fa fa-save"
+        iconPos="left"
+        label="Lưu lại"
+      ></button>
+    </ng-template>
+    <!--Block UI-->
+    <p-blockUI [blocked]="blockedPanel" [target]="pnl">
+      <p-progressSpinner></p-progressSpinner>
+    </p-blockUI>
+  </p-panel>
+</form>
