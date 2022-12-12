@@ -8,5 +8,8 @@ public static class TeduEcommerceDomainErrorCodes
 
     public const string ProductSKUAlreadyExists = "TeduEcommerce:ProductSKUAlreadyExists";
     public const string ProductIsNotExists = "TeduEcommerce:ProductIsNotExists";
+    public const string ProductAttributeIdIsNotExists = "TeduEcommerce:ProductAttributeIdIsNotExists";
+
+    public const string ProductAttributeValueIsNotValid = "TeduEcommerce:ProductAttributeValueIsNotValid";
 
 }

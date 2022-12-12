@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using TeduEcommerce.Admin.Products.Attributes;
+using TeduEcommerce.ProductAttributes;
 using TeduEcommerce.ProductCategories;
 using TeduEcommerce.Products;
 using Volo.Abp;
@@ -27,42 +29,63 @@ namespace TeduEcommerce.Admin.Products
         private readonly IRepository<ProductCategory> _productCategoryRepository;
         private readonly IBlobContainer<ProductThumbnailPictureContainer> _fileContainer;
         private readonly ProductCodeGenerator _productCodeGenerator;
+        private readonly IRepository<ProductAttribute> _productAttributeRepository;
+        private readonly IRepository<ProductAttributeDateTime> _productAttributeDateTimeRepository;
+        private readonly IRepository<ProductAttributeInt> _productAttributeIntRepository;
+        private readonly IRepository<ProductAttributeDecimal> _productAttributeDecimalRepository;
+        private readonly IRepository<ProductAttributeVarchar> _productAttributeVarcharRepository;
+        private readonly IRepository<ProductAttributeText> _productAttributeTextRepository;
+
+
         public ProductsAppService(IRepository<Product, Guid> repository,
             IRepository<ProductCategory> productCategoryRepository,
-            ProductManager productManager, 
+            ProductManager productManager,
             IBlobContainer<ProductThumbnailPictureContainer> fileContainer,
-            ProductCodeGenerator productCodeGenerator)
+            ProductCodeGenerator productCodeGenerator,
+            IRepository<ProductAttribute> productAttributeRepository,
+            IRepository<ProductAttributeDateTime> productAttributeDateTimeRepository,
+              IRepository<ProductAttributeInt> productAttributeIntRepository,
+              IRepository<ProductAttributeDecimal> productAttributeDecimalRepository,
+              IRepository<ProductAttributeVarchar> productAttributeVarcharRepository,
+              IRepository<ProductAttributeText> productAttributeTextRepository
+              )
             : base(repository)
         {
             _productManager = productManager;
             _productCategoryRepository = productCategoryRepository;
             _fileContainer = fileContainer;
             _productCodeGenerator = productCodeGenerator;
+            _productAttributeRepository = productAttributeRepository;
+            _productAttributeDateTimeRepository = productAttributeDateTimeRepository;
+            _productAttributeIntRepository = productAttributeIntRepository;
+            _productAttributeDecimalRepository = productAttributeDecimalRepository;
+            _productAttributeVarcharRepository = productAttributeVarcharRepository;
+            _productAttributeTextRepository = productAttributeTextRepository;
         }
 
         public override async Task<ProductDto> CreateAsync(CreateUpdateProductDto input)
         {
             var product = await _productManager.CreateAsync(
-                input.ManufacturerId, 
-                input.Name, 
-                input.Code, 
-                input.Slug, 
-                input.ProductType, 
+                input.ManufacturerId,
+                input.Name,
+                input.Code,
+                input.Slug,
+                input.ProductType,
                 input.SKU,
-                input.SortOrder, 
-                input.Visibility, 
-                input.IsActive, 
-                input.CategoryId, 
-                input.SeoMetaDescription, 
-                input.Description, 
+                input.SortOrder,
+                input.Visibility,
+                input.IsActive,
+                input.CategoryId,
+                input.SeoMetaDescription,
+                input.Description,
                 input.SellPrice);
-            
+
             if (input.ThumbnailPictureContent != null && input.ThumbnailPictureContent.Length > 0)
             {
                 await SaveThumbnailImageAsync(input.ThumbnailPictureName, input.ThumbnailPictureContent);
                 product.ThumbnailPicture = input.ThumbnailPictureName;
             }
-            
+
             var result = await Repository.InsertAsync(product);
 
             return ObjectMapper.Map<Product, ProductDto>(result);
@@ -128,7 +151,7 @@ namespace TeduEcommerce.Admin.Products
 
             var totalCount = await AsyncExecuter.LongCountAsync(query);
             var data = await AsyncExecuter.ToListAsync(
-                query.OrderByDescending(x=>x.CreationTime)
+                query.OrderByDescending(x => x.CreationTime)
                 .Skip(input.SkipCount)
                 .Take(input.MaxResultCount)
                 );
@@ -163,6 +186,319 @@ namespace TeduEcommerce.Admin.Products
         public async Task<string> GetSuggestNewCodeAsync()
         {
             return await _productCodeGenerator.GenerateAsync();
+        }
+
+        public async Task<ProductAttributeValueDto> AddProductAttributeAsync(AddUpdateProductAttributeDto input)
+        {
+            var product = await Repository.GetAsync(input.ProductId);
+            if (product == null)
+                throw new BusinessException(TeduEcommerceDomainErrorCodes.ProductIsNotExists);
+
+            var attribute = await _productAttributeRepository.GetAsync(x => x.Id == input.AttributeId);
+            if (attribute == null)
+                throw new BusinessException(TeduEcommerceDomainErrorCodes.ProductAttributeIdIsNotExists);
+            var newAttributeId = Guid.NewGuid();
+            switch (attribute.DataType)
+            {
+                case AttributeType.Date:
+                    if (input.DateTimeValue == null)
+                    {
+                        throw new BusinessException(TeduEcommerceDomainErrorCodes.ProductAttributeValueIsNotValid);
+                    }
+                    var productAttributeDateTime = new ProductAttributeDateTime(newAttributeId, input.AttributeId, input.ProductId, input.DateTimeValue);
+                    await _productAttributeDateTimeRepository.InsertAsync(productAttributeDateTime);
+                    break;
+                case AttributeType.Int:
+                    if (input.IntValue == null)
+                    {
+                        throw new BusinessException(TeduEcommerceDomainErrorCodes.ProductAttributeValueIsNotValid);
+                    }
+                    var productAttributeInt = new ProductAttributeInt(newAttributeId, input.AttributeId, input.ProductId, input.IntValue.Value);
+                    await _productAttributeIntRepository.InsertAsync(productAttributeInt);
+                    break;
+                case AttributeType.Decimal:
+                    if (input.DecimalValue == null)
+                    {
+                        throw new BusinessException(TeduEcommerceDomainErrorCodes.ProductAttributeValueIsNotValid);
+                    }
+                    var productAttributeDecimal = new ProductAttributeDecimal(newAttributeId, input.AttributeId, input.ProductId, input.DecimalValue.Value);
+                    await _productAttributeDecimalRepository.InsertAsync(productAttributeDecimal);
+                    break;
+                case AttributeType.Varchar:
+                    if (input.VarcharValue == null)
+                    {
+                        throw new BusinessException(TeduEcommerceDomainErrorCodes.ProductAttributeValueIsNotValid);
+                    }
+                    var productAttributeVarchar = new ProductAttributeVarchar(newAttributeId, input.AttributeId, input.ProductId, input.VarcharValue);
+                    await _productAttributeVarcharRepository.InsertAsync(productAttributeVarchar);
+                    break;
+                case AttributeType.Text:
+                    if (input.TextValue == null)
+                    {
+                        throw new BusinessException(TeduEcommerceDomainErrorCodes.ProductAttributeValueIsNotValid);
+                    }
+                    var productAttributeText = new ProductAttributeText(newAttributeId, input.AttributeId, input.ProductId, input.TextValue);
+                    await _productAttributeTextRepository.InsertAsync(productAttributeText);
+                    break;
+            }
+            await UnitOfWorkManager.Current.SaveChangesAsync();
+            return new ProductAttributeValueDto()
+            {
+                AttributeId = input.AttributeId,
+                Code = attribute.Code,
+                DataType = attribute.DataType,
+                DateTimeValue = input.DateTimeValue,
+                DecimalValue = input.DecimalValue,
+                Id = newAttributeId,
+                IntValue = input.IntValue,
+                Label = attribute.Label,
+                ProductId = input.ProductId,
+                TextValue = input.TextValue
+            };
+        }
+
+        public async Task RemoveProductAttributeAsync(Guid attributeId, Guid id)
+        {
+            var attribute = await _productAttributeRepository.GetAsync(x => x.Id == attributeId);
+            if (attribute == null)
+                throw new BusinessException(TeduEcommerceDomainErrorCodes.ProductAttributeIdIsNotExists);
+            switch (attribute.DataType)
+            {
+                case AttributeType.Date:
+                    var productAttributeDateTime = await _productAttributeDateTimeRepository.GetAsync(x => x.Id == id);
+                    if (productAttributeDateTime == null)
+                    {
+                        throw new BusinessException(TeduEcommerceDomainErrorCodes.ProductAttributeIdIsNotExists);
+                    }
+                    await _productAttributeDateTimeRepository.DeleteAsync(productAttributeDateTime);
+                    break;
+                case AttributeType.Int:
+
+                    var productAttributeInt = await _productAttributeIntRepository.GetAsync(x => x.Id == id);
+                    if (productAttributeInt == null)
+                    {
+                        throw new BusinessException(TeduEcommerceDomainErrorCodes.ProductAttributeIdIsNotExists);
+                    }
+                    await _productAttributeIntRepository.DeleteAsync(productAttributeInt);
+                    break;
+                case AttributeType.Decimal:
+                    var productAttributeDecimal = await _productAttributeDecimalRepository.GetAsync(x => x.Id == id);
+                    if (productAttributeDecimal == null)
+                    {
+                        throw new BusinessException(TeduEcommerceDomainErrorCodes.ProductAttributeIdIsNotExists);
+                    }
+                    await _productAttributeDecimalRepository.DeleteAsync(productAttributeDecimal);
+                    break;
+                case AttributeType.Varchar:
+                    var productAttributeVarchar = await _productAttributeVarcharRepository.GetAsync(x => x.Id == id);
+                    if (productAttributeVarchar == null)
+                    {
+                        throw new BusinessException(TeduEcommerceDomainErrorCodes.ProductAttributeIdIsNotExists);
+                    }
+                    await _productAttributeVarcharRepository.DeleteAsync(productAttributeVarchar);
+                    break;
+                case AttributeType.Text:
+                    var productAttributeText = await _productAttributeTextRepository.GetAsync(x => x.Id == id);
+                    if (productAttributeText == null)
+                    {
+                        throw new BusinessException(TeduEcommerceDomainErrorCodes.ProductAttributeIdIsNotExists);
+                    }
+                    await _productAttributeTextRepository.DeleteAsync(productAttributeText);
+                    break;
+            }
+            await UnitOfWorkManager.Current.SaveChangesAsync();
+        }
+
+        public async Task<List<ProductAttributeValueDto>> GetListProductAttributeAllAsync(Guid productId)
+        {
+            var attributeQuery = await _productAttributeRepository.GetQueryableAsync();
+
+            var attributeDateTimeQuery = await _productAttributeDateTimeRepository.GetQueryableAsync();
+            var attributeDecimalQuery = await _productAttributeDecimalRepository.GetQueryableAsync();
+            var attributeIntQuery = await _productAttributeIntRepository.GetQueryableAsync();
+            var attributeVarcharQuery = await _productAttributeVarcharRepository.GetQueryableAsync();
+            var attributeTextQuery = await _productAttributeTextRepository.GetQueryableAsync();
+
+            var query = from a in attributeQuery
+                        join adate in attributeDateTimeQuery on a.Id equals adate.AttributeId into aDateTimeTabke
+                        from adate in aDateTimeTabke.DefaultIfEmpty()
+                        join adecimal in attributeDecimalQuery on a.Id equals adecimal.AttributeId into aDecimalTable
+                        from adecimal in aDecimalTable.DefaultIfEmpty()
+                        join aint in attributeIntQuery on a.Id equals aint.AttributeId into aIntTable
+                        from aint in aIntTable.DefaultIfEmpty()
+                        join aVarchar in attributeVarcharQuery on a.Id equals aVarchar.AttributeId into aVarcharTable
+                        from aVarchar in aVarcharTable.DefaultIfEmpty()
+                        join aText in attributeVarcharQuery on a.Id equals aText.AttributeId into aTextTable
+                        from aText in aTextTable.DefaultIfEmpty()
+                        where (adate != null || adate.ProductId == productId)
+                        && (adecimal != null || adecimal.ProductId == productId)
+                         && (aint != null || aint.ProductId == productId)
+                          && (aVarchar != null || aVarchar.ProductId == productId)
+                           && (aText != null || aText.ProductId == productId)
+                        select new ProductAttributeValueDto()
+                        {
+                            Label = a.Label,
+                            AttributeId = a.Id,
+                            DataType = a.DataType,
+                            Code = a.Code,
+                            ProductId = productId,
+                            DateTimeValue = adate.Value,
+                            DecimalValue = adecimal.Value,
+                            IntValue = aint.Value,
+                            TextValue = aText.Value,
+                            VarcharValue = aVarchar.Value,
+                            DecimalId = adecimal.Id,
+                            IntId = aint.Id,
+                            TextId = aText.Id,
+                            VarcharId = aVarchar.Id,
+                        };
+            return await AsyncExecuter.ToListAsync(query);
+        }
+
+        public async Task<PagedResultDto<ProductAttributeValueDto>> GetListProductAttributesAsync(ProductAttributeListFilterDto input)
+        {
+            var attributeQuery = await _productAttributeRepository.GetQueryableAsync();
+
+            var attributeDateTimeQuery = await _productAttributeDateTimeRepository.GetQueryableAsync();
+            var attributeDecimalQuery = await _productAttributeDecimalRepository.GetQueryableAsync();
+            var attributeIntQuery = await _productAttributeIntRepository.GetQueryableAsync();
+            var attributeVarcharQuery = await _productAttributeVarcharRepository.GetQueryableAsync();
+            var attributeTextQuery = await _productAttributeTextRepository.GetQueryableAsync();
+
+            var query = from a in attributeQuery
+                        join adate in attributeDateTimeQuery on a.Id equals adate.AttributeId into aDateTimeTabke
+                        from adate in aDateTimeTabke.DefaultIfEmpty()
+                        join adecimal in attributeDecimalQuery on a.Id equals adecimal.AttributeId into aDecimalTable
+                        from adecimal in aDecimalTable.DefaultIfEmpty()
+                        join aint in attributeIntQuery on a.Id equals aint.AttributeId into aIntTable
+                        from aint in aIntTable.DefaultIfEmpty()
+                        join aVarchar in attributeVarcharQuery on a.Id equals aVarchar.AttributeId into aVarcharTable
+                        from aVarchar in aVarcharTable.DefaultIfEmpty()
+                        join aText in attributeVarcharQuery on a.Id equals aText.AttributeId into aTextTable
+                        from aText in aTextTable.DefaultIfEmpty()
+                        where (adate != null || adate.ProductId == input.ProductId)
+                        && (adecimal != null || adecimal.ProductId == input.ProductId)
+                         && (aint != null || aint.ProductId == input.ProductId)
+                          && (aVarchar != null || aVarchar.ProductId == input.ProductId)
+                           && (aText != null || aText.ProductId == input.ProductId)
+                        select new ProductAttributeValueDto()
+                        {
+                            Label = a.Label,
+                            AttributeId = a.Id,
+                            DataType = a.DataType,
+                            Code = a.Code,
+                            ProductId = input.ProductId,
+                            DateTimeValue = adate.Value,
+                            DecimalValue = adecimal.Value,
+                            IntValue = aint.Value,
+                            TextValue = aText.Value,
+                            VarcharValue = aVarchar.Value,
+                            DecimalId = adecimal.Id,
+                            IntId = aint.Id,
+                            TextId = aText.Id,
+                            VarcharId = aVarchar.Id,
+                        };
+            var totalCount = await AsyncExecuter.LongCountAsync(query);
+            var data = await AsyncExecuter.ToListAsync(
+                query.OrderByDescending(x => x.Label)
+                .Skip(input.SkipCount)
+                .Take(input.MaxResultCount)
+                );
+            return new PagedResultDto<ProductAttributeValueDto>(totalCount, data);
+        }
+
+        public async Task<ProductAttributeValueDto> UpdateProductAttributeAsync(Guid id, AddUpdateProductAttributeDto input)
+        {
+            var product = await Repository.GetAsync(input.ProductId);
+            if (product == null)
+                throw new BusinessException(TeduEcommerceDomainErrorCodes.ProductIsNotExists);
+
+            var attribute = await _productAttributeRepository.GetAsync(x => x.Id == input.AttributeId);
+            if (attribute == null)
+                throw new BusinessException(TeduEcommerceDomainErrorCodes.ProductAttributeIdIsNotExists);
+
+            switch (attribute.DataType)
+            {
+                case AttributeType.Date:
+                    if (input.DateTimeValue == null)
+                    {
+                        throw new BusinessException(TeduEcommerceDomainErrorCodes.ProductAttributeValueIsNotValid);
+                    }
+                    var productAttributeDateTime = await _productAttributeDateTimeRepository.GetAsync(x => x.Id == id);
+                    if (productAttributeDateTime == null)
+                    {
+                        throw new BusinessException(TeduEcommerceDomainErrorCodes.ProductAttributeIdIsNotExists);
+                    }
+                    productAttributeDateTime.Value = input.DateTimeValue.Value;
+                    await _productAttributeDateTimeRepository.UpdateAsync(productAttributeDateTime);
+                    break;
+                case AttributeType.Int:
+                    if (input.IntValue == null)
+                    {
+                        throw new BusinessException(TeduEcommerceDomainErrorCodes.ProductAttributeValueIsNotValid);
+                    }
+                    var productAttributeInt = await _productAttributeIntRepository.GetAsync(x => x.Id == id);
+                    if (productAttributeInt == null)
+                    {
+                        throw new BusinessException(TeduEcommerceDomainErrorCodes.ProductAttributeIdIsNotExists);
+                    }
+                    productAttributeInt.Value = input.IntValue.Value;
+                    await _productAttributeIntRepository.UpdateAsync(productAttributeInt);
+                    break;
+                case AttributeType.Decimal:
+                    if (input.DecimalValue == null)
+                    {
+                        throw new BusinessException(TeduEcommerceDomainErrorCodes.ProductAttributeValueIsNotValid);
+                    }
+                    var productAttributeDecimal = await _productAttributeDecimalRepository.GetAsync(x => x.Id == id);
+                    if (productAttributeDecimal == null)
+                    {
+                        throw new BusinessException(TeduEcommerceDomainErrorCodes.ProductAttributeIdIsNotExists);
+                    }
+                    productAttributeDecimal.Value = input.DecimalValue.Value;
+                    await _productAttributeDecimalRepository.UpdateAsync(productAttributeDecimal);
+                    break;
+                case AttributeType.Varchar:
+                    if (input.VarcharValue == null)
+                    {
+                        throw new BusinessException(TeduEcommerceDomainErrorCodes.ProductAttributeValueIsNotValid);
+                    }
+                    var productAttributeVarchar = await _productAttributeVarcharRepository.GetAsync(x => x.Id == id);
+                    if (productAttributeVarchar == null)
+                    {
+                        throw new BusinessException(TeduEcommerceDomainErrorCodes.ProductAttributeIdIsNotExists);
+                    }
+                    productAttributeVarchar.Value = input.VarcharValue;
+                    await _productAttributeVarcharRepository.UpdateAsync(productAttributeVarchar);
+                    break;
+                case AttributeType.Text:
+                    if (input.TextValue == null)
+                    {
+                        throw new BusinessException(TeduEcommerceDomainErrorCodes.ProductAttributeValueIsNotValid);
+                    }
+                    var productAttributeText = await _productAttributeTextRepository.GetAsync(x => x.Id == id);
+                    if (productAttributeText == null)
+                    {
+                        throw new BusinessException(TeduEcommerceDomainErrorCodes.ProductAttributeIdIsNotExists);
+                    }
+                    productAttributeText.Value = input.TextValue;
+                    await _productAttributeTextRepository.UpdateAsync(productAttributeText);
+                    break;
+            }
+            await UnitOfWorkManager.Current.SaveChangesAsync();
+            return new ProductAttributeValueDto()
+            {
+                AttributeId = input.AttributeId,
+                Code = attribute.Code,
+                DataType = attribute.DataType,
+                DateTimeValue = input.DateTimeValue,
+                DecimalValue = input.DecimalValue,
+                Id = id,
+                IntValue = input.IntValue,
+                Label = attribute.Label,
+                ProductId = input.ProductId,
+                TextValue = input.TextValue
+            };
         }
     }
 }
