@@ -1,0 +1,54 @@
+<form
+  class="form-horizontal form-label-left"
+  skipValidation
+  [formGroup]="form"
+  (ngSubmit)="saveChange()"
+>
+  <p-panel #pnlDetail header="Thông tin" [toggleable]="true" [collapsed]="false">
+    <div class="formgrid grid">
+      <div class="field col-12 md:col-6">
+        <label for="name">Tên <span class="required">*</span></label>
+        <input
+          id="name"
+          type="text"
+          pInputText
+          formControlName="name"
+          [style]="{ width: '100%' }"
+        />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="name"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+      <div class="field col-12 md:col-6">
+        <label for="description">Mô tả <span class="required">*</span></label>
+        <input
+          id="description"
+          type="text"
+          pInputText
+          formControlName="description"
+          [style]="{ width: '100%' }"
+        />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="description"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
+      </div>
+    </div>
+    <ng-template pTemplate="footer">
+      <button type="submit" class="btn btn-primary" [disabled]="!form.valid || btnDisabled">
+        {{ saveBtnName }}
+      </button>
+    </ng-template>
+
+    <p-blockUI [target]="pnlDetail" [blocked]="blockedPanelDetail">
+      <p-progressSpinner
+        [style]="{ width: '100px', height: '100px', position: 'absolute', top: '25%', left: '50%' }"
+        strokeWidth="2"
+        animationDuration=".5s"
+      ></p-progressSpinner>
+    </p-blockUI>
+  </p-panel>
+</form>
