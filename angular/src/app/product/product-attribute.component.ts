@@ -22,9 +22,12 @@ export class ProductAttributeComponent implements OnInit, OnDestroy {
 
   attributes: any[] = [];
   fullAttributes: any[] = [];
-
   productAttributes: any[] = [];
-  selectedEntity = {} as ProductDto;
+  showDateTimeControl: boolean = false;
+  showDecimalControl: boolean = false;
+  showIntControl: boolean = false;
+  showVarcharControl: boolean = false;
+  showTextControl: boolean = false;
 
   constructor(
     private productAttributeService: ProductAttributesService,
@@ -96,21 +99,6 @@ export class ProductAttributeComponent implements OnInit, OnDestroy {
 
   saveChange() {
     this.toggleBlockUI(true);
-    var selectedAttributeId = this.form.controls['attributeId'].value;
-    var dataType = this.fullAttributes.filter(x => x.id == selectedAttributeId)[0].dataType;
-    console.log(dataType);
-    var value = this.form.controls['attributeValue'].value;
-    if (dataType == AttributeType.Date) {
-      this.form.controls['dateTimeValue'].setValue(value);
-    } else if (dataType == AttributeType.Decimal) {
-      this.form.controls['decimalValue'].setValue(value);
-    } else if (dataType == AttributeType.Int) {
-      this.form.controls['intValue'].setValue(value);
-    } else if (dataType == AttributeType.Text) {
-      this.form.controls['textValue'].setValue(value);
-    } else if (dataType == AttributeType.Varchar) {
-      this.form.controls['varcharValue'].setValue(value);
-    }
     this.productService
       .addProductAttribute(this.form.value)
       .pipe(takeUntil(this.ngUnsubscribe))
@@ -130,7 +118,6 @@ export class ProductAttributeComponent implements OnInit, OnDestroy {
     this.form = this.fb.group({
       productId: new FormControl(this.config.data.id),
       attributeId: new FormControl(null, Validators.required),
-      attributeValue: new FormControl(null, Validators.required),
       dateTimeValue: new FormControl(null),
       decimalValue: new FormControl(null),
       intValue: new FormControl(null),
@@ -157,6 +144,25 @@ export class ProductAttributeComponent implements OnInit, OnDestroy {
         this.deleteItemsConfirmed(attribute, id);
       },
     });
+  }
+  selectAttribute(event: any) {
+    var dataType = this.fullAttributes.filter(x => x.id == event.value)[0].dataType;
+    this.showDateTimeControl = false;
+    this.showDecimalControl = false;
+    this.showIntControl = false;
+    this.showTextControl = false;
+    this.showVarcharControl = false;
+    if (dataType == AttributeType.Date) {
+      this.showDateTimeControl = true;
+    } else if (dataType == AttributeType.Decimal) {
+      this.showDecimalControl = true;
+    } else if (dataType == AttributeType.Int) {
+      this.showIntControl = true;
+    } else if (dataType == AttributeType.Text) {
+      this.showTextControl = true;
+    } else if (dataType == AttributeType.Varchar) {
+      this.showVarcharControl = true;
+    }
   }
   deleteItemsConfirmed(attribute: ProductAttributeValueDto, id: string) {
     this.toggleBlockUI(true);
