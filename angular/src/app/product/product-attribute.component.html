@@ -1,0 +1,67 @@
+<form [formGroup]="form" skipValidation (ngSubmit)="saveChange()">
+  <div class="grid">
+    <div class="col-3">
+      <div class="field">
+        <p-dropdown
+          [options]="attributes"
+          [style]="{ width: '100%' }"
+          placeholder="Chọn thuộc tính"
+          [showClear]="true"
+          formControlName="attributeId"
+        >
+        </p-dropdown>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="field">
+        <input
+          id="attributeValue"
+          type="text"
+          pInputText
+          formControlName="attributeValue"
+          class="w-full"
+        />
+      </div>
+    </div>
+    <div class="col-3">
+      <button type="button" (click)="saveChange()" [disabled]="!form.valid || btnDisabled" pButton>
+        Thêm
+      </button>
+    </div>
+  </div>
+</form>
+<!--Table-->
+<p-table #tableCourses [value]="productAttributes" dataKey="id">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Mã</th>
+      <th style="width: 20%">Tên thuộc tính</th>
+      <th style="width: 20%">Kiểu dữ liệu</th>
+      <th>Giá trị</th>
+      <th></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-row>
+    <tr>
+      <td>
+        {{ row.label }}
+      </td>
+      <td>{{ getDataTypeName(row.dataType) }}</td>
+      <td>{{ getValueByType(row, row.dataType) }}</td>
+      <td>
+        <button
+          pButton
+          pRipple
+          (click)="removeItem(row)"
+          type="button"
+          icon="pi pi-times"
+          class="p-button-rounded p-button-danger p-button-text"
+        ></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+<!--Block UI-->
+<p-blockUI [blocked]="blockedPanel">
+  <p-progressSpinner></p-progressSpinner>
+</p-blockUI>
