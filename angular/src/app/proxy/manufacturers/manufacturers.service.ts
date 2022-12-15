@@ -66,7 +66,7 @@ export class ManufacturersService {
     this.restService.request<any, PagedResultDto<ManufacturerInListDto>>({
       method: 'GET',
       url: '/api/app/manufacturers/filter',
-      params: { skipCount: input.skipCount, maxResultCount: input.maxResultCount, keyword: input.keyword },
+      params: { keyword: input.keyword, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
     },
     { apiName: this.apiName });
   
