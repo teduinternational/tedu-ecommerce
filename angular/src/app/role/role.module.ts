@@ -21,8 +21,9 @@ import { CalendarModule } from 'primeng/calendar';
 import { RoleDetailComponent } from './role-detail.component';
 import { RoleRoutingModule } from './role-routing.module';
 import { RoleComponent } from './role.component';
+import { PermissionGrantComponent } from './permission-grant.component';
 @NgModule({
-  declarations: [RoleComponent, RoleDetailComponent],
+  declarations: [RoleComponent, RoleDetailComponent, PermissionGrantComponent],
   imports: [
     SharedModule,
     PanelModule,
@@ -43,9 +44,8 @@ import { RoleComponent } from './role.component';
     ImageModule,
     ConfirmDialogModule,
     CalendarModule,
-    RoleRoutingModule
-    
+    RoleRoutingModule,
   ],
-  entryComponents: [RoleDetailComponent],
+  entryComponents: [RoleDetailComponent, PermissionGrantComponent],
 })
 export class RoleModule {}

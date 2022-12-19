@@ -9,7 +9,7 @@ public class TeduEcommercePermissionDefinitionProvider : PermissionDefinitionPro
     public override void Define(IPermissionDefinitionContext context)
     {
         //Catalog
-        var catalogGroup = context.AddGroup(TeduEcommercePermissions.CatalogGroupName);
+        var catalogGroup = context.AddGroup(TeduEcommercePermissions.CatalogGroupName, L("Permission:Catalog"));
 
         //Add product
         var productPermission = catalogGroup.AddPermission(TeduEcommercePermissions.Product.Default, L("Permission:Catalog.Product"));
