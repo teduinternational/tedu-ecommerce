@@ -4,8 +4,8 @@ import { RoleDto, RoleInListDto, RolesService } from '@proxy/roles';
 import { ConfirmationService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Subject, takeUntil } from 'rxjs';
+import { MessageConstants } from 'src/app/shared/constants/messages.const';
 import { NotificationService } from 'src/app/shared/services/notification.service';
-import { MessageConstants } from '../shared/constants/messages.const';
 import { PermissionGrantComponent } from './permission-grant.component';
 import { RoleDetailComponent } from './role-detail.component';
 

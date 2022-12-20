@@ -5,8 +5,8 @@ import { ProductAttributeDto, ProductAttributesService } from '@proxy/product-at
 import { attributeTypeOptions } from '@proxy/tedu-ecommerce/product-attributes';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subject, takeUntil } from 'rxjs';
-import { NotificationService } from '../shared/services/notification.service';
-import { UtilityService } from '../shared/services/utility.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
+import { UtilityService } from 'src/app/shared/services/utility.service';
 
 @Component({
   selector: 'app-attribute-detail',

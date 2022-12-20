@@ -57,7 +57,6 @@ export class RoleDetailComponent implements OnInit, OnDestroy {
   }
 
   // Validate
-  noSpecial: RegExp = /^[^<>*!_~]+$/;
   validationMessages = {
     name: [
       { type: 'required', message: 'Bạn phải nhập tên nhóm' },

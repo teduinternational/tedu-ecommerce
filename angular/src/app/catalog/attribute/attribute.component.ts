@@ -5,7 +5,7 @@ import { AttributeType } from '@proxy/tedu-ecommerce/product-attributes';
 import { ConfirmationService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Subject, take, takeUntil } from 'rxjs';
-import { NotificationService } from '../shared/services/notification.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 import { AttributeDetailComponent } from './attribute-detail.component';
 
 @Component({

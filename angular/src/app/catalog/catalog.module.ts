@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
+import { ProductComponent } from './product/product.component';
 import { PanelModule } from 'primeng/panel';
 import { TableModule } from 'primeng/table';
 import { PaginatorModule } from 'primeng/paginator';
@@ -9,6 +10,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { ProductDetailComponent } from './product/product-detail.component';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextareaModule } from 'primeng/inputtextarea';
@@ -17,15 +19,22 @@ import { TeduSharedModule } from '../shared/modules/tedu-shared.module';
 import { BadgeModule } from 'primeng/badge';
 import { ImageModule } from 'primeng/image';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ProductAttributeComponent } from './product/product-attribute.component';
 import { CalendarModule } from 'primeng/calendar';
-import { RoleDetailComponent } from './role-detail.component';
-import { RoleRoutingModule } from './role-routing.module';
-import { RoleComponent } from './role.component';
-import { PermissionGrantComponent } from './permission-grant.component';
+import { CatalogRoutingModule } from './catalog-routing.module';
+import { AttributeComponent } from './attribute/attribute.component';
+import { AttributeDetailComponent } from './attribute/attribute-detail.component';
 @NgModule({
-  declarations: [RoleComponent, RoleDetailComponent, PermissionGrantComponent],
+  declarations: [
+    ProductComponent,
+    ProductDetailComponent,
+    ProductAttributeComponent,
+    AttributeComponent,
+    AttributeDetailComponent,
+  ],
   imports: [
     SharedModule,
+    CatalogRoutingModule,
     PanelModule,
     TableModule,
     PaginatorModule,
@@ -44,8 +53,7 @@ import { PermissionGrantComponent } from './permission-grant.component';
     ImageModule,
     ConfirmDialogModule,
     CalendarModule,
-    RoleRoutingModule,
   ],
-  entryComponents: [RoleDetailComponent, PermissionGrantComponent],
+  entryComponents: [ProductDetailComponent, ProductAttributeComponent, AttributeDetailComponent],
 })
-export class RoleModule {}
+export class CatalogModule {}

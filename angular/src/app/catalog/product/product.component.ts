@@ -6,7 +6,7 @@ import { ProductType } from '@proxy/tedu-ecommerce/products';
 import { ConfirmationService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Subject, take, takeUntil } from 'rxjs';
-import { NotificationService } from '../shared/services/notification.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ProductAttributeComponent } from './product-attribute.component';
 import { ProductDetailComponent } from './product-detail.component';
 

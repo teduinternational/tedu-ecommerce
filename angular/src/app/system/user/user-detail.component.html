@@ -1,0 +1,120 @@
+<form
+  class="form-horizontal form-label-left"
+  skipValidation
+  [formGroup]="form"
+  (ngSubmit)="saveChange()"
+>
+  <p-panel #pnlDetail header="Thông tin" [toggleable]="true" [collapsed]="false">
+    <div class="formgrid grid">
+      <div class="field col-12 md:col-6">
+        <label for="userName">Tài khoản <span class="required">*</span></label>
+        <input
+          id="userName"
+          type="text"
+          pInputText
+          formControlName="userName"
+          class="w-full"
+        />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="userName"
+          [validationMessages]="validationMessages"
+        >
+        </app-validation-message>
+      </div>
+      <div class="field col-12 md:col-6">
+        <label for="password">Mật khẩu <span class="required">*</span></label>
+        <input
+          id="password"
+          type="password"
+          pInputText
+          formControlName="password"
+          class="w-full"
+        />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="password"
+          [validationMessages]="validationMessages"
+        >
+        </app-validation-message>
+      </div>
+      <div class="field col-12 md:col-6">
+        <label for="name" class="block">Tên <span class="required">*</span></label>
+        <input
+          id="name"
+          type="text"
+          pInputText
+          formControlName="name"
+          class="w-full"
+        />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="name"
+          [validationMessages]="validationMessages"
+        >
+        </app-validation-message>
+      </div>
+      <div class="field col-12 md:col-6">
+        <label for="phoneNumber">Số điện thoại<span class="required">*</span></label>
+        <input
+          id="phoneNumber"
+          type="text"
+          pInputText
+          formControlName="phoneNumber"
+          class="w-full"
+        />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="phoneNumber"
+          [validationMessages]="validationMessages"
+        >
+        </app-validation-message>
+      </div>
+      <div class="field col-12 md:col-6">
+        <label for="surname">Họ<span class="required">*</span></label>
+        <input
+          id="surname"
+          type="text"
+          pInputText
+          formControlName="surname"
+          class="w-full"
+        />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="surname"
+          [validationMessages]="validationMessages"
+        >
+        </app-validation-message>
+      </div>
+      <div class="field col-12 md:col-6">
+        <label for="email">Email <span class="required">*</span></label>
+        <input
+          id="email"
+          type="text"
+          pInputText
+          formControlName="email"
+          class="w-full"
+        />
+        <app-validation-message
+          [entityForm]="form"
+          fieldName="email"
+          [validationMessages]="validationMessages"
+        >
+        </app-validation-message>
+      </div>
+    </div>
+    <ng-template pTemplate="footer">
+      <button type="submit" class="btn btn-primary" [disabled]="!form.valid || btnDisabled">
+        Lưu lại
+      </button>
+    </ng-template>
+
+    <p-blockUI [target]="pnlDetail" [blocked]="blockedPanelDetail">
+      <p-progressSpinner
+        [style]="{ width: '100px', height: '100px', position: 'absolute', top: '25%', left: '50%' }"
+        strokeWidth="2"
+        animationDuration=".5s"
+      ></p-progressSpinner>
+    </p-blockUI>
+  </p-panel>
+</form>
