@@ -20,6 +20,7 @@ namespace TeduEcommerce.Admin.System.Users
 
         Task<List<UserInListDto>> GetListAllAsync(string filterKeyword);
         Task AssignRolesAsync(Guid userId, string[] roleNames);
+        Task SetPasswordAsync(Guid userId, SetPasswordDto input);
 
 
     }
