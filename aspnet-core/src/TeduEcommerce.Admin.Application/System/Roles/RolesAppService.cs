@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TeduEcommerce.Admin.Permissions;
 using TeduEcommerce.Roles;
 using Volo.Abp;
 using Volo.Abp.Application.Dtos;
@@ -19,6 +20,8 @@ using Volo.Abp.SimpleStateChecking;
 
 namespace TeduEcommerce.Admin.Roles
 {
+    [Authorize(IdentityPermissions.Roles.Default, Policy = "AdminOnly")]
+
     public class RolesAppService : CrudAppService<
         IdentityRole,
         RoleDto,
@@ -43,13 +46,23 @@ namespace TeduEcommerce.Admin.Roles
             PermissionManager = permissionManager;
             PermissionDefinitionManager = permissionDefinitionManager;
             SimpleStateCheckerManager = simpleStateCheckerManager;
+
+            GetPolicyName = IdentityPermissions.Roles.Default;
+            GetListPolicyName = IdentityPermissions.Roles.Default;
+            CreatePolicyName = IdentityPermissions.Roles.Create;
+            UpdatePolicyName = IdentityPermissions.Roles.Update;
+            DeletePolicyName = IdentityPermissions.Roles.Delete;
         }
+
+        [Authorize(IdentityPermissions.Roles.Delete)]
 
         public async Task DeleteMultipleAsync(IEnumerable<Guid> ids)
         {
             await Repository.DeleteManyAsync(ids);
             await UnitOfWorkManager.Current.SaveChangesAsync();
         }
+
+        [Authorize(IdentityPermissions.Roles.Default)]
 
         public async Task<List<RoleInListDto>> GetListAllAsync()
         {
@@ -59,6 +72,8 @@ namespace TeduEcommerce.Admin.Roles
             return ObjectMapper.Map<List<IdentityRole>, List<RoleInListDto>>(data);
 
         }
+
+        [Authorize(IdentityPermissions.Roles.Default)]
 
         public async Task<PagedResultDto<RoleInListDto>> GetListFilterAsync(BaseListFilterDto input)
         {
@@ -70,6 +85,8 @@ namespace TeduEcommerce.Admin.Roles
 
             return new PagedResultDto<RoleInListDto>(totalCount, ObjectMapper.Map<List<IdentityRole>, List<RoleInListDto>>(data));
         }
+
+        [Authorize(IdentityPermissions.Roles.Create)]
 
         public async override Task<RoleDto> CreateAsync(CreateUpdateRoleDto input)
         {
@@ -86,6 +103,8 @@ namespace TeduEcommerce.Admin.Roles
             await UnitOfWorkManager.Current.SaveChangesAsync();
             return ObjectMapper.Map<IdentityRole, RoleDto>(data);
         }
+
+        [Authorize(IdentityPermissions.Roles.Update)]
 
         public async override Task<RoleDto> UpdateAsync(Guid id, CreateUpdateRoleDto input)
         {
@@ -106,6 +125,8 @@ namespace TeduEcommerce.Admin.Roles
             await UnitOfWorkManager.Current.SaveChangesAsync();
             return ObjectMapper.Map<IdentityRole, RoleDto>(data);
         }
+
+        [Authorize(IdentityPermissions.Roles.Default)]
 
         public async Task<GetPermissionListResultDto> GetPermissionsAsync(string providerName, string providerKey)
         {
@@ -192,6 +213,8 @@ namespace TeduEcommerce.Admin.Roles
                 Permissions = new List<PermissionGrantInfoDto>(),
             };
         }
+
+        [Authorize(IdentityPermissions.Roles.Update)]
 
         public virtual async Task UpdatePermissionsAsync(string providerName, string providerKey, UpdatePermissionsDto input)
         {

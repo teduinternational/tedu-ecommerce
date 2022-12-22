@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authorization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,8 @@ using Volo.Abp.Identity;
 
 namespace TeduEcommerce.Admin.Users
 {
+    [Authorize(IdentityPermissions.Users.Default, Policy = "AdminOnly")]
+
     public class UsersAppService : CrudAppService<IdentityUser, UserDto, Guid, PagedResultRequestDto,
                         CreateUserDto, UpdateUserDto>, IUsersAppService
     {
@@ -22,13 +25,22 @@ namespace TeduEcommerce.Admin.Users
             IdentityUserManager identityUserManager) : base(repository)
         {
             _identityUserManager = identityUserManager;
+
+            GetPolicyName = IdentityPermissions.Users.Default;
+            GetListPolicyName = IdentityPermissions.Users.Default;
+            CreatePolicyName = IdentityPermissions.Users.Create;
+            UpdatePolicyName = IdentityPermissions.Users.Update;
+            DeletePolicyName = IdentityPermissions.Users.Delete;
         }
 
+        [Authorize(IdentityPermissions.Users.Delete)]
         public async Task DeleteMultipleAsync(IEnumerable<Guid> ids)
         {
             await Repository.DeleteManyAsync(ids);
             await UnitOfWorkManager.Current.SaveChangesAsync();
         }
+
+        [Authorize(IdentityPermissions.Users.Default)]
 
         public async Task<List<UserInListDto>> GetListAllAsync(string filterKeyword)
         {
@@ -44,7 +56,9 @@ namespace TeduEcommerce.Admin.Users
             return ObjectMapper.Map<List<IdentityUser>, List<UserInListDto>>(data);
         }
 
-        public  async Task<PagedResultDto<UserInListDto>> GetListWithFilterAsync(BaseListFilterDto input)
+        [Authorize(IdentityPermissions.Users.Default)]
+
+        public async Task<PagedResultDto<UserInListDto>> GetListWithFilterAsync(BaseListFilterDto input)
         {
             var query = await Repository.GetQueryableAsync();
 
@@ -64,6 +78,8 @@ namespace TeduEcommerce.Admin.Users
             var users = ObjectMapper.Map<List<IdentityUser>, List<UserInListDto>> (data);
             return new PagedResultDto<UserInListDto>(totalCount, users);
         }
+
+        [Authorize(IdentityPermissions.Users.Create)]
 
         public async override Task<UserDto> CreateAsync(CreateUserDto input)
         {
@@ -102,6 +118,8 @@ namespace TeduEcommerce.Admin.Users
             }
         }
 
+        [Authorize(IdentityPermissions.Users.Update)]
+
         public async override Task<UserDto> UpdateAsync(Guid id, UpdateUserDto input)
         {
             var user = await _identityUserManager.FindByIdAsync(id.ToString());
@@ -130,6 +148,8 @@ namespace TeduEcommerce.Admin.Users
             }
         }
 
+        [Authorize(IdentityPermissions.Users.Default)]
+
         public async override Task<UserDto> GetAsync(Guid id)
         {
             var user = await _identityUserManager.FindByIdAsync(id.ToString());
@@ -144,6 +164,8 @@ namespace TeduEcommerce.Admin.Users
             userDto.Roles = roles;
             return userDto;
         }
+
+        [Authorize(IdentityPermissions.Users.Update)]
 
         public async Task AssignRolesAsync(Guid userId, string[] roleNames)
         {
@@ -171,6 +193,8 @@ namespace TeduEcommerce.Admin.Users
                 throw new UserFriendlyException(errors);
             }
         }
+
+        [Authorize(IdentityPermissions.Users.Update)]
 
         public async Task SetPasswordAsync(Guid userId, SetPasswordDto input)
         {

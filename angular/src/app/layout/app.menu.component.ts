@@ -20,19 +20,37 @@ export class AppMenuComponent implements OnInit {
       {
         label: 'Sản phẩm',
         items: [
-          { label: 'Danh sách sản phẩm', icon: 'pi pi-fw pi-circle', routerLink: ['/catalog/product'] },
-          { label: 'Danh sách thuộc tính', icon: 'pi pi-fw pi-circle', routerLink: ['/catalog/attribute'] },
-
+          {
+            label: 'Danh sách sản phẩm',
+            icon: 'pi pi-fw pi-circle',
+            routerLink: ['/catalog/product'],
+            permission: 'TeduEcomAdminCatalog.Product',
+          },
+          {
+            label: 'Danh sách thuộc tính',
+            icon: 'pi pi-fw pi-circle',
+            routerLink: ['/catalog/attribute'],
+            permission: 'TeduEcomAdminCatalog.Attribute',
+          },
         ],
       },
       {
         label: 'Hệ thống',
         items: [
-          { label: 'Danh sách quyền', icon: 'pi pi-fw pi-circle', routerLink: ['/system/role'] },
-          { label: 'Danh sách người dùng', icon: 'pi pi-fw pi-circle', routerLink: ['/system/user'] },
-
+          {
+            label: 'Danh sách quyền',
+            icon: 'pi pi-fw pi-circle',
+            routerLink: ['/system/role'],
+            permission: 'AbpIdentity.Roles',
+          },
+          {
+            label: 'Danh sách người dùng',
+            icon: 'pi pi-fw pi-circle',
+            routerLink: ['/system/user'],
+            permission: 'AbpIdentity.Users',
+          },
         ],
-      }
+      },
     ];
   }
 }
