@@ -3,6 +3,7 @@ import { RestService } from '@abp/ng.core';
 import type { PagedResultDto, PagedResultRequestDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
 import type { BaseListFilterDto } from '../models';
+import type { GetPermissionListResultDto, UpdatePermissionsDto } from '../volo/abp/permission-management/models';
 
 @Injectable({
   providedIn: 'root',
@@ -71,10 +72,29 @@ export class RolesService {
     { apiName: this.apiName });
   
 
+  getPermissions = (providerName: string, providerKey: string) =>
+    this.restService.request<any, GetPermissionListResultDto>({
+      method: 'GET',
+      url: '/api/app/roles/permissions',
+      params: { providerName, providerKey },
+    },
+    { apiName: this.apiName });
+  
+
   update = (id: string, input: CreateUpdateRoleDto) =>
     this.restService.request<any, RoleDto>({
       method: 'PUT',
       url: `/api/app/roles/${id}`,
+      body: input,
+    },
+    { apiName: this.apiName });
+  
+
+  updatePermissions = (providerName: string, providerKey: string, input: UpdatePermissionsDto) =>
+    this.restService.request<any, void>({
+      method: 'PUT',
+      url: '/api/app/roles/permissions',
+      params: { providerName, providerKey },
       body: input,
     },
     { apiName: this.apiName });

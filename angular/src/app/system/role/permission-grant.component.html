@@ -1,0 +1,40 @@
+<form
+  class="form-horizontal form-label-left"
+  skipValidation
+  [formGroup]="form"
+  (ngSubmit)="saveChange()"
+>
+  <p-panel #pnlDetail header="Phân quyền cho role" [toggleable]="true" [collapsed]="false">
+    <div *ngFor="let group of groups">
+      <h2>{{ group.displayName }}</h2>
+      <div
+        [id]="permission.name"
+        class="field-checkbox"
+        *ngFor="let permission of group.permissions; let i = index"
+      >
+        <p-checkbox
+          [value]="permission.name"
+          [(ngModel)]="selectedPermissions"
+          [inputId]="permission.name"
+          [ngModelOptions]="{standalone: true}"
+
+        ></p-checkbox>
+        <label for="permission.name">{{ permission.displayName }}</label>
+      </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+      <button type="submit" class="btn btn-primary" [disabled]="!form.valid || btnDisabled">
+        {{ saveBtnName }}
+      </button>
+    </ng-template>
+
+    <p-blockUI [target]="pnlDetail" [blocked]="blockedPanelDetail">
+      <p-progressSpinner
+        [style]="{ width: '100px', height: '100px', position: 'absolute', top: '25%', left: '50%' }"
+        strokeWidth="2"
+        animationDuration=".5s"
+      ></p-progressSpinner>
+    </p-blockUI>
+  </p-panel>
+</form>

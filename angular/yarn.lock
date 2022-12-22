@@ -318,6 +318,15 @@
   optionalDependencies:
     parse5 "^5.0.0"
 
+"@angular/cdk@^14.2.5":
+  version "14.2.7"
+  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-14.2.7.tgz#65eb6fbbeed6120fad4e3913aa66f8b74c853ac3"
+  integrity sha512-/tEsYaUbDSnfEmKVvAMramIptmhI67O+9STjOV0i+74XR2NospeK0fkbywIANu1n3w6AHGMotvRWJrjmbCElFg==
+  dependencies:
+    tslib "^2.3.0"
+  optionalDependencies:
+    parse5 "^5.0.0"
+
 "@angular/cli@^14.2.3", "@angular/cli@~14.2.1":
   version "14.2.8"
   resolved "https://registry.yarnpkg.com/@angular/cli/-/cli-14.2.8.tgz#2afa002697a8bc347f9bad9a3f0987367e136b04"

@@ -1,0 +1,28 @@
+<p-panel #pnlDetail header="Thông tin" [toggleable]="true" [collapsed]="false">
+  <p-pickList
+    [source]="availableRoles"
+    [target]="seletedRoles"
+    sourceHeader="Các quyền có sẵn"
+    targetHeader="Các quyền chọn"
+    [dragdrop]="true"
+  >
+    <ng-template let-role pTemplate="item">
+      <div>
+        {{ role}}
+      </div>
+    </ng-template>
+  </p-pickList>
+  <ng-template pTemplate="footer">
+    <button type="button" (click)="saveChange()" class="btn btn-primary" [disabled]="btnDisabled">
+      {{ saveBtnName }}
+    </button>
+  </ng-template>
+
+  <p-blockUI [target]="pnlDetail" [blocked]="blockedPanelDetail">
+    <p-progressSpinner
+      [style]="{ width: '100px', height: '100px', position: 'absolute', top: '25%', left: '50%' }"
+      strokeWidth="2"
+      animationDuration=".5s"
+    ></p-progressSpinner>
+  </p-blockUI>
+</p-panel>

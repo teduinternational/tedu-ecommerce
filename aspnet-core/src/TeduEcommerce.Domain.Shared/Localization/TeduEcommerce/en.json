@@ -1,8 +1,23 @@
 {
   "culture": "en",
   "texts": {
-    "Menu:Home": "Home",
-    "Welcome": "Welcome",
-    "LongWelcomeMessage": "Welcome to the application. This is a startup project based on the ABP framework. For more information, visit abp.io."
+    "Permission:Catalog": "Danh mục",
+    "Permission:Catalog.Product": "Sản phẩm",
+    "Permission:Catalog.Product.Create": "Tạo mới sản phẩm",
+    "Permission:Catalog.Product.Update": "Cập nhật sản phẩm",
+    "Permission:Catalog.Product.Delete": "Xóa sản phẩm",
+    "Permission:Catalog.Product.AttributeManage": "Quản lý thuộc tính",
+    "Permission:Catalog.Attribute": "Thuộc tính",
+    "Permission:Catalog.Attribute.Create": "Tạo mới thuộc tính",
+    "Permission:Catalog.Attribute.Update": "Cập nhật thuộc tính",
+    "Permission:Catalog.Attribute.Delete": "Xóa thuộc tính",
+    "Permission:Catalog.Manufacturer": "Nhà sản xuất",
+    "Permission:Catalog.Manufacturer.Create": "Tạo mới Nhà sản xuất",
+    "Permission:Catalog.Manufacturer.Update": "Cập nhật Nhà sản xuất",
+    "Permission:Catalog.Manufacturer.Delete": "Xóa Nhà sản xuất",
+    "Permission:Catalog.ProductCategory": "Loại sản phẩm",
+    "Permission:Catalog.ProductCategory.Create": "Tạo mới Loại sản phẩm",
+    "Permission:Catalog.ProductCategory.Update": "Cập nhật Loại sản phẩm",
+    "Permission:Catalog.ProductCategory.Delete": "Xóa Loại sản phẩm"
   }
 }
