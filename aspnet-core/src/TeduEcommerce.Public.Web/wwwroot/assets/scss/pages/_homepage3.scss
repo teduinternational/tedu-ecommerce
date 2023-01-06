@@ -1,0 +1,183 @@
+.text-underline
+{
+    text-decoration: underline;
+}
+.box-slide-bg-1
+{
+    background: url(../imgs/page/homepage3/banner.png) no-repeat bottom right;
+    background-size: 70% auto;
+    height: 100%;
+    display: inline-block;
+    width: 100%;
+}
+.block-water
+{
+    background-image: url(../imgs/page/homepage3/water.png);
+    background-repeat:  no-repeat;
+    background-position:  right bottom;
+    background-size: 55% auto;
+    padding-bottom: 40px;
+    min-height: 240px;
+}
+.block-kitchen
+{
+    background-image: url(../imgs/page/homepage3/kitchen.png);
+    background-repeat:  no-repeat;
+    background-position:  right bottom;
+    background-size: 85% auto;
+    padding-bottom: 40px;
+    min-height: 240px;
+}
+.block-electric
+{
+    background-image: url(../imgs/page/homepage3/electric.png);
+    background-repeat:  no-repeat;
+    background-position:  right bottom;
+    background-size: 85% auto;
+    padding-bottom: 40px;
+    min-height: 240px;
+}
+.box-icon-flash
+{
+    padding: 0px 0px 0px 55px;
+    background-image: url(../imgs/page/homepage3/flash.svg);
+    background-repeat: no-repeat;
+    background-position: left -13px top 5px;
+}
+.box-all-hurry-round
+{
+    background-color: $background-white;
+    border-radius: 50px;
+    padding: 10px 40px 10px 30px;
+    bottom: 0px;
+    .box-count.box-count-square .deals-countdown
+    {
+        background-color: transparent;
+    }
+    .box-count.hide-period
+    {
+        bottom: -1px;
+    }
+    .box-text-hurryup
+    {
+        padding: 2px 0px 2px 50px;
+        background-image: url(../imgs/page/homepage3/clock.svg);
+        background-repeat: no-repeat;
+        background-position: left 0px top 1px;
+    }
+    .box-count.box-count-square .deals-countdown .countdown-amount
+    {
+        margin-bottom: 0px;
+    }
+    .box-count.box-count-square .deals-countdown .countdown-amount
+    {
+        width: 35px;
+    }
+}
+.banner-ads
+{
+    background: url(../imgs/page/homepage3/bg-ads.png) no-repeat 0px 0px;
+    background-size: cover;
+    padding: 50px 10px;
+    position: relative;
+    &::before
+    {
+        content: "";
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        height: 100%;
+        width: 400px;
+        background: url(../imgs/page/homepage3/bg-left-ads.png) no-repeat bottom right;
+        background-size: contain;
+    }
+    &::after
+    {
+        content: "";
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        height: 100%;
+        width: 350px;
+        background: url(../imgs/page/homepage3/bg-right-ads.png) no-repeat bottom left;
+        background-size: contain;
+    }
+}
+.card-ads-1
+{
+    .card-grid-inner
+    {
+        background: url(../imgs/page/homepage3/bg-kitchen.png) no-repeat 0px 0px;
+        padding: 20px 0px 0px 0px;
+        border-radius: 4px;
+        overflow: hidden;
+        background-size: cover;
+        .image-box
+        {
+            margin-bottom: 0px;
+            height: auto;
+            line-height: 100%;
+            margin-top: 30px;
+            overflow: visible;
+            img
+            {
+                max-width: 100%;
+            }
+        }
+    }
+}
+.card-ads-2
+{
+    .card-grid-inner
+    {
+        background: url(../imgs/page/homepage3/bg-kitchen2.png) no-repeat bottom right;
+        background-size: cover;
+        padding: 20px 0px 0px 0px;
+        border-radius: 4px;
+        overflow: hidden;
+        height: 100%;
+        .image-box
+        {
+            margin-bottom: 0px;
+            height: auto;
+            line-height: 100%;
+            margin-top: 15px;
+            overflow: visible;
+            text-align: left;
+            img
+            {
+                max-width: 100%;
+                max-height: 260px;
+            }
+        }
+    }
+    .box-count.box-count-square .deals-countdown
+    {
+        background-color: transparent;
+        border-radius: 0px;
+    }
+    .box-count.box-count-square .deals-countdown .countdown-amount
+    {
+        width: 35px;
+        background-color: $color-brand-3;
+    }
+    .box-count.box-count-square .deals-countdown .countdown-section
+    {
+        margin-left: 0px;
+        margin-right: 14px;
+    }
+    .box-count.hide-period .deals-countdown
+    {
+        padding-left: 0px;
+    }
+}
+.block-ads-1
+{
+    background: url(../imgs/page/homepage3/bg-ads-2.png) no-repeat 0px 0px;
+    padding: 50px 40px;
+}
+.block-ads-2
+{
+    background: url(../imgs/page/homepage3/bg-ads-3.png) no-repeat 0px 0px;
+    padding: 50px 40px;
+}

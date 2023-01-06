@@ -1,0 +1,188 @@
+.label-green
+{
+    background-color: $color-success;
+    border-radius: 4px;
+    padding: 2px 8px;
+    display: inline-block;
+    color: $color-white;
+    font-size: $font-sm;
+    line-height: 20px;
+    font-weight: 700;
+}
+.list-disc
+{
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px ;
+}
+.btn
+{
+    &.btn-gray-1000
+    {
+        background-color: $color-gray-1000;
+        color: $color-white;
+    }
+    &.btn-link-white
+    {
+        text-decoration: underline;
+        color: $color-white;
+    }
+}
+.lh-65
+{
+    line-height: 65px;
+}
+.saleoff
+{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 93px;
+    width: 106px;
+    background: url(../imgs/page/homepage2/saleoff.svg) no-repeat 0px 0px;
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: bold;
+    color: $color-white;
+    font-family: $font-kanit;
+    padding: 25px 0px 0px 15px;
+    border-radius: 8px 0 0 0;
+}
+.list-none-border
+{
+    padding: 15px 0px;
+    border: 0px !important;
+    margin: -10px 0px 0px 0px;
+    &.list-brands
+    {
+        a
+        {
+            img {
+                opacity: 0.3;
+                max-height: 20px;
+                width: 100%;
+                transition: 0.2s;
+            }
+            &:hover {
+                img {
+                    opacity: 0.8;
+                    transition: 0.2s;
+                }
+            }
+        }
+
+    }
+}
+.list-9-col
+{
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -10px;
+    margin-right: -10px;
+    li
+    {
+        flex: 0 0 auto;
+        width: 11.11%;
+        padding: 0px 10px;
+        text-align: center;
+        margin-bottom: 20px;
+        .box-category
+        {
+            border-radius: 4px;
+            border: 1px solid $color-border-1;
+            padding: 5px 5px 10px 5px;
+            &:hover
+            {
+                border: 1px solid $color-gray-500;
+            }
+            .image
+            {
+                height: 80px;
+                line-height: 80px;
+                margin-bottom: 5px;
+                img
+                {
+                    max-height: 90%;
+                    vertical-align: middle;
+                }
+            }
+            .text-info
+            {
+                a
+                {
+                    line-height: 18px;
+                    display: block;
+                }
+            }
+        }
+    }
+}
+.font-24
+{
+    font-size: 24px;
+    line-height: 24px;
+}
+.lbl-new-arrival
+{
+    background-color: $background-bg-18;
+    border-radius: 4px;
+    display: inline-block;
+    padding: 4px 7px;
+}
+.box-bdrd-4
+{
+    border-radius: 4px;
+    padding: 30px 20px;
+}
+.bg-headphone
+{
+    background-image: url(../imgs/page/homepage2/headphone.png);
+    background-repeat:  no-repeat;
+    background-position:  right bottom;
+    background-size: 85%;
+    padding-bottom: 100px;
+    min-height: 315px;
+}
+.bg-watch
+{
+    background-image: url(../imgs/page/homepage2/watch.png);
+    background-repeat:  no-repeat;
+    background-position:  center bottom;
+    background-size: auto 58%;
+    padding-bottom: 100px;
+    min-height: 315px;
+}
+.bg-ipad
+{
+    background-image: url(../imgs/page/homepage2/ipad.png);
+    background-repeat:  no-repeat;
+    background-position:  left bottom;
+    background-size: 80% auto;
+    padding-bottom: 100px;
+    min-height: 315px;
+}
+.box-slider-item
+{
+    .head
+    {
+        border-bottom: 1px solid $color-gray-100;
+        display: inline-block;
+        width: 100%;
+        padding-bottom: 10px;
+        margin-bottom: 30px;
+    }
+}
+.swiper-button-prev-style-2, .swiper-button-prev-style-2:hover
+{
+    top: -62px;
+    right: 20px;
+    width: 17px;
+    background: url(../imgs/page/homepage2/prev.svg) no-repeat top right;
+}
+.swiper-button-next-style-2, .swiper-button-next-style-2:hover
+{
+    top: -62px;
+    width: 17px;
+    background: url(../imgs/page/homepage2/next.svg) no-repeat top right;
+}

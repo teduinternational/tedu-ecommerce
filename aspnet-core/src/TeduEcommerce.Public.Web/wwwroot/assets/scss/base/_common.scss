@@ -1,0 +1,965 @@
+/*RESET*/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+main {
+	display: block;
+	clear: both;
+}
+thead {
+    font-weight: 600;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol,
+ul {
+    list-style: none;
+}
+blockquote,
+q {
+    quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: "";
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+img {
+    max-width: 100%;
+}
+input,
+select,
+button,
+textarea {
+    font-family: $font-text;
+    font-size: $font-sm;
+}
+*:focus,
+select:focus,
+.custom-select:focus,
+button:focus,
+textarea:focus,
+textarea.form-control:focus,
+input.form-control:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+[type="text"].form-control:focus,
+[type="password"].form-control:focus,
+[type="email"].form-control:focus,
+[type="tel"].form-control:focus,
+[contenteditable].form-control:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+input:focus::-moz-placeholder {
+    opacity: 0;
+    -webkit-transition: 0.4s;
+    -o-transition: 0.4s;
+    transition: 0.4s;
+}
+
+li.hr {
+    span {
+        width: 100%;
+        height: 1px;
+        background-color: #e4e4e4;
+        margin: 20px 0;
+        display: block;
+    }
+}
+/*--- Common Classes---------------------*/
+::selection {
+    background: $color-brand-3; /* WebKit/Blink Browsers */
+    color: #fff;
+}
+::-moz-selection {
+    background: $color-brand-3; /* Gecko Browsers */
+    color: #fff;
+}
+::placeholder {
+    color: $color-gray-300;
+    opacity: 1;
+}
+:-ms-input-placeholder,
+::-webkit-input-placeholder {
+    color: $color-gray-300;
+    opacity: 1;
+}
+.fix {
+    overflow: hidden;
+}
+.hidden {
+    display: none;
+}
+.clear {
+    clear: both;
+}
+.section {
+    float: left;
+    width: 100%;
+}
+.f-right {
+    float: right;
+}
+.capitalize {
+    text-transform: capitalize;
+}
+.uppercase {
+    text-transform: uppercase;
+}
+.bg-img {
+    background-position: center center;
+    background-size: cover;
+}
+.position-relative {
+    position: relative;
+}
+.height-100vh {
+    height: 100vh !important;
+}
+*:focus,
+select:focus,
+.custom-select:focus,
+button:focus,
+textarea:focus,
+textarea.form-control:focus,
+input.form-control:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+[type="text"].form-control:focus,
+[type="password"].form-control:focus,
+[type="email"].form-control:focus,
+[type="tel"].form-control:focus,
+[contenteditable].form-control:focus {
+    outline: none !important;
+    box-shadow: none;
+}
+.border-radius {
+    border-radius: 4px;
+}
+.border-radius-5 {
+    border-radius: 5px;
+}
+.border-radius-10 {
+    border-radius: 10px;
+}
+.border-radius-15 {
+    border-radius: 15px;
+}
+.border-radius-20 {
+    border-radius: 20px;
+}
+.hover-up {
+    transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
+    &:hover {
+        transform: translateY(-2px);
+        transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
+    }
+}
+a {
+    text-decoration: none;
+    color: $color-brand-1;
+}
+a:hover {
+    color: $color-brand-1;
+}
+*:hover {
+    transition-duration: 0.2s;
+}
+.img-responsive {
+    max-width: 100%;
+}
+// New Ecom
+body
+{
+    font-family: $font-dm-sans;
+}
+.font-xs-bold
+{
+    font-family: $font-dm-sans;
+    font-size: 13px;
+    line-height: 18px;
+    font-weight: bold;
+}
+.font-sm-bold
+{
+    font-family: $font-dm-sans;
+    font-size: $font-sm !important;
+    line-height: 20px !important;
+    font-weight: bold !important;
+}
+.font-md-bold
+{
+    font-family: $font-dm-sans;
+    font-size: 16px !important;
+    line-height: 24px !important;
+    font-weight: bold !important;
+}
+.font-lg-bold
+{
+    font-family: $font-dm-sans;
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: bold;
+}
+.font-xs
+{
+    font-family: $font-dm-sans;
+    font-size: 12px !important;
+    line-height: 18px !important;
+    font-weight: 400;
+}
+.font-sm
+{
+    font-family: $font-dm-sans;
+    font-size: 14px !important;
+    line-height: 20px !important;
+    font-weight: 400;
+}
+.font-sm-lh32
+{
+    font-family: $font-dm-sans;
+    font-size: 14px;
+    line-height: 32px;
+    font-weight: 400;
+}
+.font-md
+{
+    font-family: $font-dm-sans;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+}
+.font-lg
+{
+    font-family: $font-dm-sans;
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 400;
+}
+.font-xl
+{
+    font-family: $font-dm-sans;
+    font-size: 28px;
+    line-height: 32px;
+}
+.font-xxl
+{
+    font-family: $font-dm-sans;
+    font-size: 24px;
+    line-height: 24px;
+    font-weight: 400;
+}
+.font-2xl
+{
+    font-family: $font-dm-sans;
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 400;
+}
+.font-3xl
+{
+    font-family: $font-dm-sans;
+    font-size: 30px;
+    line-height: 36px;
+    font-weight: 400;
+}
+.font-base
+{
+    font-family: $font-dm-sans;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+}
+.font-base-2
+{
+    font-family: $font-dm-sans;
+    font-size: 18px;
+    line-height: 23px;
+    font-weight: 400;
+}
+.font-desc
+{
+    font-family: $font-dm-sans;
+    font-size: 19px;
+    line-height: 27px;
+    font-weight: 400;
+}
+.bg-1
+{
+    background-color: $background-bg-1;
+}
+.bg-2
+{
+    background-color: $background-bg-2;
+}
+.bg-3
+{
+    background-color: $background-bg-3;
+}
+.bg-4
+{
+    background-color: $background-bg-4 !important;
+}
+.bg-5
+{
+    background-color: $background-bg-5;
+}
+.bg-6
+{
+    background-color: $background-bg-6 !important;
+}
+.bg-7
+{
+    background-color: $background-bg-7;
+}
+.bg-8
+{
+    background-color: $background-bg-8;
+}
+.bg-9
+{
+    background-color: $background-bg-9 !important;
+}
+.bg-10
+{
+    background-color: $background-bg-10 !important;
+}
+.bg-11
+{
+    background-color: $background-bg-11;
+}
+.bg-11-2
+{
+    background-color: $background-bg-11-2;
+}
+.bg-11-3
+{
+    background-color: $background-bg-11-3;
+}
+.bg-12
+{
+    background-color: $background-bg-12;
+}
+.bg-13
+{
+    background-color: $background-bg-13;
+}
+.bg-14
+{
+    background-color: $background-bg-14;
+}
+.bg-15
+{
+    background-color: $background-bg-15;
+}
+.bg-16
+{
+    background-color: $background-bg-16;
+}
+.bg-17
+{
+    background-color: $background-bg-17;
+}
+.bg-18
+{
+    background-color: $background-bg-18;
+}
+.bg-19
+{
+    background-color: $background-bg-19;
+}
+.bg-20
+{
+    background-color: $background-bg-20;
+}
+.bg-21
+{
+    background-color: $background-bg-21;
+}
+.bg-22
+{
+    background-color: $background-bg-22;
+}
+.bg-26 {
+    background-color: $background-bg-26;
+}
+.bg-27 {
+    background-color: $background-bg-27 !important;
+}
+.bg-28 {
+    background-color: $background-bg-28 !important;
+}
+.bg-29 {
+    background-color: $background-bg-29 !important;
+}
+.bg-30 {
+    background-color: $background-bg-30 !important;
+}
+.bg-31 {
+    background-color: $background-bg-31 !important;
+}
+.bg-32 {
+    background-color: $background-bg-32 !important;
+}
+.bg-white {
+    background-color: $color-white !important;
+}
+h1
+{
+    font-family: $font-dm-sans;
+    font-size: 64px;
+    line-height: 83px;
+    font-weight: bold;
+}
+h2
+{
+    font-family: $font-dm-sans;
+    font-size: 45px;
+    line-height: 58px;
+    font-weight: bold;
+}
+h3
+{
+    font-family: $font-dm-sans;
+    font-size: 32px;
+    line-height: 41px;
+    font-weight: bold;
+}
+h4
+{
+    font-family: $font-dm-sans;
+    font-size: 24px;
+    line-height: 31px;
+    font-weight: bold;
+}
+h5
+{
+    font-family: $font-dm-sans;
+    font-size: 20px;
+    line-height: 26px;
+    font-weight: bold;
+}
+h6
+{
+    font-family: $font-dm-sans;
+    font-size: 16px;
+    line-height: 18px;
+    font-weight: bold;
+}
+.bgrd-4
+{
+    border-radius: 4px;
+}
+.bg-brand-1
+{
+    background-color: $color-brand-1 !important;
+}
+.bg-brand-2
+{
+    background-color: $color-brand-2 !important;
+}
+.bg-color-success
+{
+    background-color: $color-success;
+}
+.bg-color-danger
+{
+    background-color: $color-danger;
+}
+.bg-color-info
+{
+    background-color: $color-info;
+}
+.bg-gray-50
+{
+    background-color: $color-gray-50;
+}
+.bd-gray-200
+{
+    border-color: $color-gray-200 !important;
+}
+.box-count
+{
+    text-align: center;
+    margin: 0px 0px 20px 0px;
+    .deals-countdown
+    {
+        border-radius: 34px;
+        background-color: $color-brand-3;
+        display: flex;
+        padding: 4px 12px;
+        width: 84%;
+        margin: auto;
+        max-width: 230px;
+        .countdown-section
+        {
+            display: inline-block;
+            text-align: center;
+            width: 25%;
+            line-height: 12px;
+            position: relative;
+            &::before
+            {
+                content: ":";
+                position: absolute;
+                top: 3px;
+                right: -1px;
+                font-weight: bold;
+                font-size: 16px;
+                color: $color-white;
+            }
+            span
+            {
+                display: block;
+                color: $color-white;
+            }
+            .countdown-period
+            {
+                text-transform: capitalize;
+            }
+            &:last-child
+            {
+                &::before
+                {
+                    display: none;
+                }
+            }
+        }
+    }
+    &.box-count-square
+    {
+        margin-bottom: 5px;
+        .deals-countdown
+        {
+            background-color: $background-white;
+            width: 100%;
+            margin: auto;
+            text-align: center;
+            display: inline-block;
+            max-width: 250px;
+            .countdown-section
+            {
+                display: inline-block;
+                text-align: center;
+                line-height: 12px;
+                position: relative;
+                margin: 0px 7px;
+                width: auto;
+                &::before
+                {
+                    content: ":";
+                    position: absolute;
+                    top: 12px;
+                    right: -9px;
+                    font-weight: bold;
+                    font-size: 16px;
+                    color: $color-gray-900;
+                }
+                .countdown-period
+                {
+                    color: $color-gray-500;
+                }
+            }
+            .countdown-amount
+            {
+                background-color: $color-brand-2;
+                border-radius: 4px;
+                color: $color-white;
+                padding: 10px 0px;
+                width: 42px;
+                display: inline-block;
+                margin-bottom: 5px;
+            }
+        }
+    }
+    &.hide-period
+    {
+        margin-bottom: 0px;
+        position: relative;
+        bottom: -5px;
+        display: inline-block;
+        vertical-align: middle;
+        .deals-countdown
+        {
+            padding: 4px 2px;
+        }
+        .countdown-section
+        {
+            .countdown-period
+            {
+                display: none;
+            }
+        }
+    }
+}
+.box-all-hurry
+{
+    display: inline-block;
+    position: relative;
+    bottom: -20px;
+}
+.box-text-hurryup
+{
+    vertical-align: middle;
+    line-height: 16px;
+    padding: 7px 0px 0px 0px;
+    .font-md-bold
+    {
+        line-height: 20px;
+    }
+    .font-xs
+    {
+        line-height: 14px;
+    }
+}
+.lh-14
+{
+    line-height: 14px !important;
+}
+.lh-16
+{
+    line-height: 16px !important;
+}
+.divide
+{
+    width: 100%;
+    display: inline-block;
+    border-bottom: 1px solid $color-border-1;
+    margin: 10px 0px 20px 0px;
+}
+.box-progress
+{
+    display: inline-block;
+    width: 100%;
+    padding: 20px 0px;
+    .progress-bar
+    {
+        display: inline-block;
+        width: 100%;
+        background-color: $color-border-1;
+        height: 9px;
+        border-radius: 24px;
+        overflow: visible;
+        .progress-bar-inner
+        {
+            background-color: $color-brand-2;
+            border-radius: 24px;
+            width: 50%;
+            height: 9px;
+            position: relative;
+            &::before
+            {
+                content: "";
+                height: 15px;
+                border-radius: 50%;
+                background-color: $color-brand-2;
+                width: 15px;
+                position: absolute;
+                top: -3px;
+                right: -3px;
+            }
+        }
+    }
+    &.box-progress-small
+    {
+        .progress-bar
+        {
+            height: 6px;
+            .progress-bar-inner
+            {
+                height: 6px;
+                &::before
+                {
+                    height: 11px;
+                    width: 11px;
+                    top: -3px;
+                }
+            }
+        }
+    }
+}
+.width-100
+{
+    width: 100%;
+}
+.section-box
+{
+    display: inline-block;
+    width: 100%;
+}
+.font-bold
+{
+    font-weight: bold !important;
+}
+.font-medium
+{
+    font-weight: 500 !important;
+}
+.font-18
+{
+    font-size: 18px;
+    line-height: 23px;
+    color: $color-brand-1;
+    font-weight: 400;
+}
+.font-30
+{
+    font-size: 30px;
+    line-height: 39px;
+    color: $color-gray-1000;
+    font-weight: bold;
+}
+.font-32
+{
+    font-size: 32px;
+    line-height: 31px;
+    color: $color-gray-1000;
+    font-weight: bold;
+}
+.font-33
+{
+    font-size: 30px;
+    line-height: 35px;
+    color: $color-gray-1000;
+    font-weight: bold;
+}
+.font-59
+{
+    font-size: 59px;
+    line-height: 64px;
+    color: $color-gray-1000;
+    font-weight: bold;
+}
+.font-55
+{
+    font-size: 55px;
+    line-height: 62px;
+    color: $color-gray-1000;
+    font-weight: bold;
+}
+.font-16
+{
+    font-size: $font-md !important;
+    line-height: 23px !important;
+    color: $color-brand-3 !important;
+}
+.font-68
+{
+    font-size: 68px;
+    line-height: 70px;
+}
+.font-11
+{
+    font-size: 11px !important;
+    line-height: 18px !important;
+}
+.font-17
+{
+    font-size: 17px;
+    line-height: 22px;
+}
+.font-46
+{
+    font-size: 46px;
+    line-height: 60px;
+}
+.font-23
+{
+    font-size: 23px;
+    line-height: 26px;
+}
+.h-500
+{
+    height: 500px !important;
+}
+.color-brand-1
+{
+    color: $color-brand-1 !important;
+}
+.color-brand-2
+{
+    color: $color-brand-2 !important;
+}
+.color-brand-3
+{
+    color: $color-brand-3 !important;
+}
+.color-blue {
+    color: $color-blue !important;
+}
+.color-success
+{
+    color: $color-success;
+}
+.color-danger
+{
+    color: $color-danger;
+}
+.color-warning
+{
+    color: $color-warning;
+}
+.color-gray-500
+{
+    color: $color-gray-500;
+}
+.color-gray-700 {
+    color: $color-gray-700;
+}
+.color-gray-900
+{
+    color: $color-gray-900;
+}
+.color-gray-1000
+{
+    color: $color-gray-1000;
+}
+.color-gray-1100
+{
+    color: $color-gray-1100;
+}
+.color-white
+{
+    color: $color-white !important;
+}
+.color-green
+{
+    color: $color-green !important;
+}
+.color-border-1
+{
+    color: $color-border-1;
+}
+.background-gray-100 {
+    background-color: $color-gray-100 !important;
+}
+.background-gray-50 {
+    background-color: $color-gray-50 !important;
+}
+.w-auto {
+    width: auto !important;
+}
+.mw-80 {
+    max-width: 80%;
+}
+.border-bottom {
+    border-color: $color-gray-100 !important;
+}
+.pagination {
+    margin-bottom: 20px;
+}
+.opacity-100 {
+    opacity: 1 !important;
+}
+.transform-none {
+    transform: none !important;
+}

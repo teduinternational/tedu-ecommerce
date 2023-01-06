@@ -1,0 +1,129 @@
+.box-swiper {
+    position: relative;
+    width: 100%;
+    .swiper-container {
+        position: relative;
+        height: 100%;
+        .item-logo {
+            border: 1px solid $color-gray-500;
+            padding: 39px 0px 36px 0px;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: $box-shadow-2;
+            img {
+                max-width: 100%;
+            }
+            &:hover {
+                border: 1px solid $color-gray-800;
+                box-shadow: $box-shadow-3;
+            }
+        }
+    }
+}
+.swiper-button-next:after,
+.swiper-button-prev:after {
+    content: "";
+}
+.swiper-button-next {
+    background: url(../imgs/slider/swiper/next.svg) no-repeat 0px 0px;
+    &:hover {
+        background: url(../imgs/slider/swiper/next.svg) no-repeat 0px 0px;
+    }
+}
+.swiper-button-prev {
+    background: url(../imgs/slider/swiper/prev.svg) no-repeat 0px 0px;
+    &:hover {
+        background: url(../imgs/slider/swiper/prev.svg) no-repeat 0px 0px;
+    }
+}
+.swiper-button-next,
+.swiper-button-prev {
+    width: 31px;
+    height: 31px;
+    margin-top: 0px;
+}
+.swiper-button-next {
+    left: auto;
+    right: 0px;
+    top: 20px;
+}
+.swiper-button-prev {
+    left: auto;
+    right: 40px;
+    top: 20px;
+}
+.swiper-button-next.swiper-button-disabled,
+.swiper-button-prev.swiper-button-disabled {
+    opacity: 1;
+}
+.swiper-pagination {
+    text-align: center;
+    width: 100%;
+    .swiper-pagination-bullet {
+        width:10px;
+        height: 10px;
+        display: inline-block;
+        border-radius: 50%;
+        background: $color-brand-2;
+        opacity: .2;
+    }
+    .swiper-pagination-bullet-active {
+        opacity: 1;
+        background: $color-brand-2;
+        width:12px;
+        height: 12px;
+    }
+}
+.swiper-pagination-bullet {
+    margin: 10px;
+}
+/*Style of the location of the div that wraps the custom pager*/
+.swiper-pagination-custom {
+    bottom: 40px;
+    padding-left: 70px;
+}
+.swiper-pagination-customs {
+    background: url(../imgs/slider/swiper/dot.svg) no-repeat 0px 0px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 10px;
+    height: 10px;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+/*Customize the style representation when pager is activated*/
+.swiper-pagination-customs-active,
+.swiper-pagination-customs:hover {
+    background: url(../imgs/slider/swiper/dot-active.svg) no-repeat 0px 0px;
+    width: 12px;
+    height: 12px;
+    margin-bottom: -1px;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+.box-button-slider
+{
+    position: absolute;
+    top: 10px;
+    right: 0px;
+}
+.swiper-group-1 {
+    .swiper-pagination {
+        bottom: 50px;
+        left: 55px;
+    }
+    &.swiper-home-3 {
+        .swiper-pagination {
+            left: 0px;
+        }
+    }
+    &.home-9 {
+        .swiper-pagination {
+            bottom: 20px;
+            left: 25px;
+        }
+    }
+}

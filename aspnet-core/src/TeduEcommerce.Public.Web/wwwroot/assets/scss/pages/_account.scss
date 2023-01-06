@@ -1,0 +1,262 @@
+.form-register {
+    .btn-buy {
+        padding: 14px 22px;
+    }
+    .form-control {
+        padding: 14px 20px;
+    }
+    .form-group {
+        margin-bottom: 22px;
+    }
+}
+.checkagree {
+    float: left;
+    margin: 2px 10px 0px 0px;
+    border: 1px solid $color-gray-100;
+}
+.nav-tabs-account {
+    text-align: left;
+    li {
+        a {
+            font-weight: bold;
+            &:hover {
+                font-weight: bold;
+            }
+        }
+        &:first-child {
+            padding-left: 0px;
+            a {
+                padding-left: 0px;
+            }
+        }
+    }
+}
+.list-notifications {
+    .item-notification {
+        border: 1px solid $color-gray-100;
+        display: flex;
+        border-radius: 4px;
+        padding: 15px;
+        margin-bottom: 20px;
+        align-items: center;
+        .image-notification {
+            min-width: 130px;
+            max-width: 130px;
+        }
+        .info-notification {
+            padding-left: 20px;
+            width: 100%;
+            padding-right: 20px;
+        }
+        .button-notification {
+            width: 10%;
+            min-width: 150px;
+            max-width: 150px;
+            text-align: center;
+        }
+    }
+}
+.list-orders {
+   .item-orders {
+        display: flex;
+        margin-bottom: 20px;
+        align-items: center;
+        &:last-child {
+            margin-bottom: 0px;
+        }
+        .image-orders {
+            min-width: 130px;
+            max-width: 130px;
+            border: 1px solid $color-gray-500;
+            text-align: center;
+            padding: 8px;
+            img {
+                max-width: 100%;
+            }
+        }
+        .info-orders {
+            padding-left: 20px;
+            width: 50%;
+            padding-right: 20px;
+        }
+        .quantity-orders {
+            width: 25%;
+        }
+        .price-orders {
+            width: 10%;
+            min-width: 150px;
+            max-width: 150px;
+            text-align: center;
+        }
+    }
+}
+.body-orders {
+    padding: 20px;
+}
+.box-orders {
+    border: 1px solid $color-border-1;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    .head-orders {
+        display: flex;
+        border-bottom: 1px solid $color-border-1;
+        padding: 20px;
+        width: 100%;
+        align-items: center;
+        .head-left {
+            width: 100%;
+            text-align: left;
+            display: flex;
+            align-items: center;
+        }
+        .head-right {
+            width: 20%;
+            text-align: right;
+        }
+    }
+}
+.label-delivery {
+    display: inline-block;
+    padding: 7px 16px;
+    border-radius: 30px;
+    color: $color-white;
+    font-size: $font-xs;
+    line-height: 12px;
+    background-color: $color-brand-2;
+}
+.label-delivered {
+    background-color: $color-success;
+}
+.label-cancel {
+    background-color: $color-danger;
+}
+.h54 {
+    height: 54px;
+    line-height: 34px;
+}
+.form-tracking {
+    .form-control {
+        height: 54px;
+    }
+    .btn-buy {
+        height: 54px;
+        line-height: 34px;
+    }
+    .box-input {
+        width: 100%;
+        margin-right: 15px;
+    }
+    .box-button {
+        width: 10%;
+        min-width: 185px;
+        max-width: 185px;
+    }
+}
+.list-features {
+    margin: 20px 0px 20px 0px;
+    ul {
+        padding: 0px 0px 0px 15px;
+        margin: 0px;
+        li {
+            list-style: disc;
+            color: $color-gray-500;
+            font-size: $font-md;
+            line-height: 32px;
+        }
+    }
+}
+.list-steps {
+    display: flex;
+    width: 100%;
+    margin: 30px 0px;
+    min-width: 768px;
+    .item-step {
+        width: 50%;
+        position: relative;
+        &::before {
+            height: 10px;
+            content: "";
+            width: 100%;
+            z-index: 1;
+            position: absolute;
+            left: 1px;
+            top: 33px;
+            margin-top: -5px;
+            background-color: $color-brand-3;
+        }
+        &:last-child {
+            &::before {
+                display: none;
+            }
+        }
+        .rounded-step {
+            position: relative;
+            z-index: 2;
+            .icon-step {
+                width: 64px;
+                height: 64px;
+                border-radius: 50%;
+                background-color: $color-gray-200;
+                margin-bottom: 20px;
+                &.step-1 {
+                    background-image: url(../imgs/page/account/tick.svg);
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    &.active {
+                        background-image: url(../imgs/page/account/tick-active.svg);
+                        background-color: $color-success;
+                    }
+                }
+                &.step-2 {
+                    background-image: url(../imgs/page/account/in-production.svg);
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    &.active {
+                        background-image: url(../imgs/page/account/in-production-active.svg);
+                        background-color: $color-success;
+                    }
+                }
+                &.step-3 {
+                    background-image: url(../imgs/page/account/shipping.svg);
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    &.active {
+                        background-image: url(../imgs/page/account/shipping-active.svg);
+                        background-color: $color-success;
+                    }
+                }
+                &.step-4 {
+                    background-image: url(../imgs/page/account/delivery-truck.svg);
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    &.active {
+                        background-image: url(../imgs/page/account/delivery-active.svg);
+                        background-color: $color-success;
+                    }
+                }
+                &.step-5 {
+                    background-image: url(../imgs/page/account/delivered.svg);
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    &.active {
+                        background-image: url(../imgs/page/account/delivered-active.svg);
+                        background-color: $color-success;
+                    }
+                }
+            }
+        }
+    }
+}
+.map-account {
+    width: 100%;
+    margin: 30px 0px;
+    iframe {
+        width: 100%;
+        height: 340px;
+    }
+}
+#tab-setting {
+    .form-control {
+        min-height: 44px;
+    }
+}

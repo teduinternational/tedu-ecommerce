@@ -1,0 +1,138 @@
+.cb-container {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  line-height: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.cb-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    background-color: $background-white;
+    border: 2px solid $color-gray-200;
+    border-radius: 4px;
+}
+.cb-container input:checked ~ .checkmark {
+  border: 2px solid $color-brand-2;
+}
+.cb-container .text-small
+{
+	color: $color-gray-500;
+}
+.cb-container input:checked ~ .text-small
+{
+	color: $color-gray-1000;
+}
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.cb-container input:checked ~ .checkmark:after {
+  display: block;
+}
+.cb-container input:checked ~ .text-lbl
+{
+	color: $color-gray-900;
+}
+.cb-container .checkmark:after {
+  left: -1px;
+  top: -1px;
+  width: 16px;
+  height: 16px;
+  background: $color-brand-2 url(../imgs/page/shop/tick.svg) no-repeat center;
+}
+
+// style 2
+.cb-container-2 {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 4px;
+  cursor: pointer;
+  line-height: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.cb-container-2 input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 3px;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    background-color: $background-white;
+    border: 1px solid $color-gray-900;
+    border-radius: 0px;
+}
+.cb-container-2 input:checked ~ .checkmark {
+  border: 1px solid $color-gray-900;
+}
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.cb-container-2 input:checked ~ .checkmark:after {
+  display: block;
+}
+.cb-container-2 input:checked ~ .text-lbl
+{
+	color: $color-gray-900;
+}
+.cb-container-2 .checkmark:after {
+  left: 0px;
+  top: 1px;
+  width: 16px;
+  height: 16px;
+  background: url(../imgs/page/product/checked.svg) no-repeat center;
+}
+/*COMPONENTS -> FORM*/
+.form-control {
+  border: 1px solid $color-gray-100 !important;
+}
+.form-control::-webkit-date-and-time-value {
+  color: $color-gray-700;
+  font-size: $font-sm;
+  line-height: 18px;
+}
+.form-control::-moz-placeholder {
+  color: $color-gray-300;
+  font-size: $font-sm;
+  line-height: 18px;
+}
+.form-control::placeholder {
+  color: $color-gray-300;
+  font-size: $font-sm;
+  line-height: 18px;
+}
+.form-control:disabled, .form-control[readonly] {
+  color: $color-gray-700;
+  font-size: $font-sm;
+  line-height: 18px;
+}
