@@ -19,5 +19,7 @@ namespace TeduEcommerce.Public.Products
         Task<List<ProductAttributeValueDto>> GetListProductAttributeAllAsync(Guid productId);
         Task<PagedResultDto<ProductAttributeValueDto>> GetListProductAttributesAsync(ProductAttributeListFilterDto input);
 
+        Task<List<ProductInListDto>> GetListTopSellerAsync(int numberOfRecords);
+
     }
 }

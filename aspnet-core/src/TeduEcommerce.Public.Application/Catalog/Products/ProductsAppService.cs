@@ -202,5 +202,16 @@ namespace TeduEcommerce.Public.Products
                 );
             return new PagedResultDto<ProductAttributeValueDto>(totalCount, data);
         }
+
+        public async Task<List<ProductInListDto>> GetListTopSellerAsync(int numberOfRecords)
+        {
+            var query = await Repository.GetQueryableAsync();
+            query = query.Where(x => x.IsActive == true)
+                .OrderByDescending(x=>x.CreationTime)
+                .Take(numberOfRecords);
+            var data = await AsyncExecuter.ToListAsync(query);
+
+            return ObjectMapper.Map<List<Product>, List<ProductInListDto>>(data);
+        }
     }
 }

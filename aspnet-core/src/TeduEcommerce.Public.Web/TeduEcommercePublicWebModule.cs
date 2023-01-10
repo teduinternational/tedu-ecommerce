@@ -31,6 +31,7 @@ using Volo.Abp.VirtualFileSystem;
 using TeduEcommerce.Localization;
 using TeduEcommerce.MultiTenancy;
 using TeduEcommerce.EntityFrameworkCore;
+using Volo.Abp.Caching.StackExchangeRedis;
 
 namespace TeduEcommerce.Public.Web;
 
@@ -45,7 +46,9 @@ namespace TeduEcommerce.Public.Web;
     typeof(AbpAspNetCoreMvcUiLeptonXLiteThemeModule),
     typeof(AbpTenantManagementWebModule),
     typeof(AbpAspNetCoreSerilogModule),
-    typeof(AbpSwashbuckleModule)
+    typeof(AbpSwashbuckleModule),
+    typeof(AbpCachingStackExchangeRedisModule)
+
     )]
 public class TeduEcommercePublicWebModule : AbpModule
 {
