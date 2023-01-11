@@ -12,7 +12,9 @@ namespace TeduEcommerce.Public.ProductCategories
         Guid, 
         PagedResultRequestDto>
     {
-        Task<PagedResultDto<ProductCategoryInListDto>> GetListFilterAsync(BaseListFilterDto input);
+        Task<PagedResult<ProductCategoryInListDto>> GetListFilterAsync(BaseListFilterDto input);
         Task<List<ProductCategoryInListDto>> GetListAllAsync();
+        Task<ProductCategoryDto> GetByCodeAsync(string code);
+
     }
 }
