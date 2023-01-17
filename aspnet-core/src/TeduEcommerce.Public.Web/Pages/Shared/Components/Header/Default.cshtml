@@ -119,19 +119,34 @@
                     <div class="burger-icon burger-icon-white"><span class="burger-icon-top"></span><span class="burger-icon-mid"></span><span class="burger-icon-bottom"></span></div>
                 </div>
                 <div class="header-shop">
-                    <div class="d-inline-block box-dropdown-cart">
-                        <span class="font-lg icon-list icon-account"><span>Account</span></span>
-                        <div class="dropdown-account">
-                            <ul>
-                                <li><a href="page-account.html">My Account</a></li>
-                                <li><a href="page-account.html">Order Tracking</a></li>
-                                <li><a href="page-account.html">My Orders</a></li>
-                                <li><a href="page-account.html">My Wishlist</a></li>
-                                <li><a href="page-account.html">Setting</a></li>
-                                <li><a href="page-login.html">Sign out</a></li>
-                            </ul>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="d-inline-block box-dropdown-cart">
+                            <span class="font-lg icon-list icon-account"><span>Account</span></span>
+                            <div class="dropdown-account">
+                                <ul>
+                                    <li><a href="page-account.html">My Account</a></li>
+                                    <li><a href="page-account.html">Order Tracking</a></li>
+                                    <li><a href="page-account.html">My Orders</a></li>
+                                    <li><a href="page-account.html">My Wishlist</a></li>
+                                    <li><a href="page-account.html">Setting</a></li>
+                                    <li><a href="/logout.html">Sign out</a></li>
+                                </ul>
+                            </div>
                         </div>
-                    </div><a class="font-lg icon-list icon-wishlist" href="shop-wishlist.html"><span>Wishlist</span><span class="number-item font-xs">5</span></a>
+                        <a class="font-lg icon-list icon-wishlist" href="shop-wishlist.html"><span>Wishlist</span><span class="number-item font-xs">5</span></a>
+                    }
+                    else{
+                         <div class="d-inline-block box-dropdown-cart">
+                            <span class="font-lg icon-list icon-account"><span>Login/Register</span></span>
+                            <div class="dropdown-account">
+                                <ul>
+                                    <li><a href="/login.html">Login</a></li>
+                                    <li><a href="/register.html">Register</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    }
                     <div class="d-inline-block box-dropdown-cart">
                         <span class="font-lg icon-list icon-cart"><span>Cart</span><span class="number-item font-xs">2</span></span>
                         <div class="dropdown-cart">
@@ -243,25 +258,39 @@
                         </ul>
                     </nav>
                 </div>
-                <div class="mobile-account">
-                    <div class="mobile-header-top">
-                        <div class="user-account">
-                            <a href="page-account.html"><img src="/assets/imgs/template/ava_1.png" alt="Ecom"></a>
-                            <div class="content">
-                                <h6 class="user-name">Hello<span class="text-brand"> Steven !</span></h6>
-                                <p class="font-xs text-muted">You have 3 new messages</p>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="mobile-account">
+                        <div class="mobile-header-top">
+                            <div class="user-account">
+                                <a href="page-account.html"><img src="/assets/imgs/template/ava_1.png" alt="Ecom"></a>
+                                <div class="content">
+                                    <h6 class="user-name">Hello<span class="text-brand"> Steven !</span></h6>
+                                    <p class="font-xs text-muted">You have 3 new messages</p>
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="mobile-menu">
+                            <li><a href="page-account.html">My Account</a></li>
+                            <li><a href="page-account.html">Order Tracking</a></li>
+                            <li><a href="page-account.html">My Orders</a></li>
+                            <li><a href="page-account.html">My Wishlist</a></li>
+                            <li><a href="page-account.html">Setting</a></li>
+                            <li><a href="page-login.html">Sign out</a></li>
+                        </ul>
+                    </div>
+                }
+                else
+                {
+                    <div class="mobile-account">
+                        <div class="mobile-header-top">
+                            <div class="user-account">
+                                <a href="/login.html">Login</a>
+                               
                             </div>
                         </div>
                     </div>
-                    <ul class="mobile-menu">
-                        <li><a href="page-account.html">My Account</a></li>
-                        <li><a href="page-account.html">Order Tracking</a></li>
-                        <li><a href="page-account.html">My Orders</a></li>
-                        <li><a href="page-account.html">My Wishlist</a></li>
-                        <li><a href="page-account.html">Setting</a></li>
-                        <li><a href="page-login.html">Sign out</a></li>
-                    </ul>
-                </div>
+                }
                 <div class="mobile-banner">
                     <div class="bg-5 block-iphone">
                         <span class="color-brand-3 font-sm-lh32">Starting from $899</span>
@@ -512,25 +541,40 @@
                         </ul>
                     </nav>
                 </div>
-                <div class="mobile-account">
-                    <div class="mobile-header-top">
-                        <div class="user-account">
-                            <a href="page-account.html"><img src="/assets/imgs/template/ava_1.png" alt="Ecom"></a>
-                            <div class="content">
-                                <h6 class="user-name">Hello<span class="text-brand"> Steven !</span></h6>
-                                <p class="font-xs text-muted">You have 3 new messages</p>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="mobile-account">
+                        <div class="mobile-header-top">
+                            <div class="user-account">
+                                <a href="page-account.html"><img src="/assets/imgs/template/ava_1.png" alt="Ecom"></a>
+                                <div class="content">
+                                    <h6 class="user-name">Hello<span class="text-brand"> Steven !</span></h6>
+                                    <p class="font-xs text-muted">You have 3 new messages</p>
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="mobile-menu">
+                            <li><a href="page-account.html">My Account</a></li>
+                            <li><a href="page-account.html">Order Tracking</a></li>
+                            <li><a href="page-account.html">My Orders</a></li>
+                            <li><a href="page-account.html">My Wishlist</a></li>
+                            <li><a href="page-account.html">Setting</a></li>
+                            <li><a href="page-login.html">Sign out</a></li>
+                        </ul>
+                    </div>
+                }
+                else
+                { 
+                    <div class="mobile-account">
+                        <div class="mobile-header-top">
+                            <div class="user-account">
+                                <a href="/login.html">Login</a>
                             </div>
                         </div>
                     </div>
-                    <ul class="mobile-menu">
-                        <li><a href="page-account.html">My Account</a></li>
-                        <li><a href="page-account.html">Order Tracking</a></li>
-                        <li><a href="page-account.html">My Orders</a></li>
-                        <li><a href="page-account.html">My Wishlist</a></li>
-                        <li><a href="page-account.html">Setting</a></li>
-                        <li><a href="page-login.html">Sign out</a></li>
-                    </ul>
-                </div>
+                    
+                }
+
                 <div class="mobile-banner">
                     <div class="bg-5 block-iphone">
                         <span class="color-brand-3 font-sm-lh32">Starting from $899</span>

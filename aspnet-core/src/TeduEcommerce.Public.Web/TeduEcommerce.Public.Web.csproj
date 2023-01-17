@@ -320,11 +320,15 @@
   <ItemGroup>
     <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
     <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
+    <PackageReference Include="Volo.Abp.Account.HttpApi.Client" Version="6.0.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Authentication.OpenIdConnect" Version="6.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite" Version="1.0.0" />
     <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" Version="6.0.2" />
+    <PackageReference Include="Volo.Abp.Http.Client.IdentityModel.Web" Version="6.0.2" />
+    <PackageReference Include="Volo.Abp.Identity.AspNetCore" Version="6.0.2" />
   </ItemGroup>
 
   <ItemGroup>

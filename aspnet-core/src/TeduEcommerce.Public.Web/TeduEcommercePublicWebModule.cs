@@ -32,6 +32,15 @@ using TeduEcommerce.Localization;
 using TeduEcommerce.MultiTenancy;
 using TeduEcommerce.EntityFrameworkCore;
 using Volo.Abp.Caching.StackExchangeRedis;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using System;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using Volo.Abp.AspNetCore.Authentication.OAuth;
+using Volo.Abp.AspNetCore.Authentication.OpenIdConnect;
+using Volo.Abp.Http.Client.IdentityModel.Web;
+using Volo.Abp.Identity.AspNetCore;
+using Volo.Abp.Account;
 
 namespace TeduEcommerce.Public.Web;
 
@@ -47,8 +56,12 @@ namespace TeduEcommerce.Public.Web;
     typeof(AbpTenantManagementWebModule),
     typeof(AbpAspNetCoreSerilogModule),
     typeof(AbpSwashbuckleModule),
-    typeof(AbpCachingStackExchangeRedisModule)
-
+    typeof(AbpCachingStackExchangeRedisModule),
+    typeof(AbpAspNetCoreAuthenticationOAuthModule),
+    typeof(AbpAspNetCoreAuthenticationOpenIdConnectModule),
+    typeof(AbpHttpClientIdentityModelWebModule),
+    typeof(AbpIdentityAspNetCoreModule),
+    typeof(AbpAccountHttpApiClientModule)
     )]
 public class TeduEcommercePublicWebModule : AbpModule
 {
@@ -82,7 +95,7 @@ public class TeduEcommercePublicWebModule : AbpModule
         var hostingEnvironment = context.Services.GetHostingEnvironment();
         var configuration = context.Services.GetConfiguration();
 
-        ConfigureAuthentication(context);
+        ConfigureAuthentication(context,configuration);
         ConfigureUrls(configuration);
         ConfigureBundles();
         ConfigureAutoMapper();
@@ -93,9 +106,41 @@ public class TeduEcommercePublicWebModule : AbpModule
         ConfigureSwaggerServices(context.Services);
     }
     
-    private void ConfigureAuthentication(ServiceConfigurationContext context)
+    private void ConfigureAuthentication(ServiceConfigurationContext context, IConfiguration configuration)
     {
-        context.Services.ForwardIdentityAuthenticationForBearer(OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme);
+        //context.Services.ForwardIdentityAuthenticationForBearer(OpenIddictValidationAspNetCoreDefaults.AuthenticationScheme);
+        context.Services.AddAuthentication(options =>
+        {
+            options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+        })
+        .AddCookie(options =>
+        {
+            options.ExpireTimeSpan = TimeSpan.FromDays(365);
+        })
+        .AddAbpOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options =>
+        {
+            options.Authority = configuration["AuthServer:Authority"];
+            options.RequireHttpsMetadata = Convert.ToBoolean(configuration["AuthServer:RequireHttpsMetadata"]);
+            options.ResponseType = OpenIdConnectResponseType.Code;
+
+            options.ClientId = configuration["AuthServer:ClientId"];
+            options.ClientSecret = configuration["AuthServer:ClientSecret"];
+            options.GetClaimsFromUserInfoEndpoint = true;
+
+            options.UsePkce = true;
+            options.SaveTokens = true;
+            options.Scope.Add("roles");
+            options.Scope.Add("email");
+            options.Scope.Add("phone");
+            options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+
+            options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+            {
+                ValidateAudience = false,
+                ValidateIssuer = false,
+            };
+        });
     }
 
     private void ConfigureUrls(IConfiguration configuration)
