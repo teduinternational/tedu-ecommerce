@@ -1,0 +1,21 @@
+.form-group {
+    margin-bottom: 15px;
+}
+.box-cart-left {
+    border: 1px solid $color-gray-100;
+    border-radius: 4px;
+    padding: 20px;
+}
+.select-style1 {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent;
+    background-image: url("../imgs/page/cart/arrow-down.svg");
+    background-repeat: no-repeat;
+    background-position: right 5px center;
+}
+.summary-cart {
+    border: 1px solid $color-gray-100;
+    padding: 10px;
+    margin-bottom: 30px;
+}

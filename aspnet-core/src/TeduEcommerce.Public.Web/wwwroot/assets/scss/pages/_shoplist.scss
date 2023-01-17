@@ -1,0 +1,98 @@
+@media (min-width: 768px) {
+    .display-list {
+        .card-grid-style-3 {
+            .card-grid-inner {
+                display: flex;
+
+                .image-box {
+                    width: 25%;
+                    min-width: 260px;
+                    max-width: 260px;
+                    margin-bottom: 40px;
+                }
+
+                .info-right {
+                    width: 100%;
+
+                    .btn-cart {
+                        max-width: 260px;
+                    }
+                }
+
+                .tools {
+                    bottom: 10px;
+                    left: 10px;
+                    top: auto;
+                    right: auto;
+                    width: 100%;
+                    max-width: 260px;
+
+                    .btn {
+                        margin-bottom: 0px !important;
+                        margin-right: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.display-list {
+    .btn-tooltip {
+        position: relative;
+
+        &:after {
+            color: $color-brand-3;
+            background-color: $color-border-1;
+            top: -35px;
+            left: 0;
+            position: absolute;
+            white-space: nowrap;
+            border-radius: 5px;
+            font-size: 11px;
+            padding: 7px 10px;
+            content: attr(aria-label);
+            line-height: 1.3;
+            box-shadow: 0;
+            transition: 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: 0;
+            transition-duration: 0.2s;
+            bottom: unset;
+            right: unset;
+        }
+
+        &:before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 0;
+            border: 7px solid transparent;
+            border-top-color: $color-border-1;
+            z-index: 9;
+            margin-bottom: 0;
+            transition: 0;
+            opacity: 0;
+            visibility: hidden;
+            margin-left: -8px;
+        }
+
+        &:hover {
+            &:after {
+                opacity: 1;
+                visibility: visible;
+                transform: 0;
+                transition-duration: 0.2s;
+            }
+
+            &:before {
+                opacity: 1;
+                visibility: visible;
+                -webkit-transform: translateY(-8px);
+                -ms-transform: translateY(-8px);
+                transform: translateY(-8px);
+            }
+        }
+    }
+}

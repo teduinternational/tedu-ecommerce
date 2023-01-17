@@ -1,0 +1,31 @@
+.list-services {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0px -10px 0px -10px;
+    li {
+        font-family: $font-dm-sans;
+        font-size: 14px !important;
+        line-height: 22px !important;
+        font-weight: bold !important;
+        color: $color-brand-3;
+        display: inline-block;
+        width: 100%;
+        padding: 0px 10px 0px 37px;
+        background: url(../imgs/page/about/checked.svg) no-repeat 10px 1px;
+        flex: 0 0 auto;
+        width: 50%;
+        margin-bottom: 15px;
+    }
+}
+.box-images-logo {
+    img {
+        opacity: 1;
+        max-height: 28px;
+        margin-right: 30px;
+        margin-bottom: 40px;
+    }
+}
+.border-1 {
+    border-top: 1px solid $color-border-1;
+}

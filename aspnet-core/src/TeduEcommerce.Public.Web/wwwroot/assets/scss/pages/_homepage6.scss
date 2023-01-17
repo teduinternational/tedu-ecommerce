@@ -1,0 +1,178 @@
+.banner-left {
+    position: relative;
+    width: 100%;
+    height: 535px;
+    background: url(../imgs/page/homepage6/banner1.png) no-repeat top center;
+    background-size: cover;
+    margin-bottom: 30px;
+}
+.banner-middle {
+    position: relative;
+    width: 100%;
+    height: 535px;
+    background-size: cover;
+}
+.banner-right-home6 {
+    position: relative;
+    width: 100%;
+    height: 535px;
+    background: url(../imgs/page/homepage6/banner3.png) no-repeat top center;
+    background-size: cover;
+    margin-bottom: 30px;
+}
+.box-adsolute-banner {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    min-width: 220px;
+    padding: 15px;
+    background-color: $background-white;
+    .btn-link-brand-2 {
+        text-decoration: underline;
+        padding: 0px 0px;
+        font-weight: 400;
+        line-height: 18px;
+    }
+}
+.banner-middle {
+    .box-adsolute-banner {
+        top: 20%;
+        left: 40px;
+        background-color: transparent;
+    }
+}
+.list-categories-5 {
+    display: flex;
+    margin: 0px -10px;
+    flex-wrap: wrap;
+    li {
+        padding: 0px 10px;
+        flex: 0 0 auto;
+        width: 20%;
+    }
+}
+.swiper-button-prev-style-4 {
+    left: 40px;
+    bottom: 10px;
+    top: auto;
+    background: url(../imgs/page/homepage6/prev.svg) no-repeat center;
+    height: 56px;
+    width: 56px;
+    &:hover {
+        background: url(../imgs/page/homepage6/prev.svg) no-repeat center;
+    }
+}
+.swiper-button-next-style-4 {
+    left: 98px;
+    bottom: 10px;
+    top: auto;
+    background: url(../imgs/page/homepage6/next.svg) no-repeat center;
+    height: 56px;
+    width: 56px;
+    &:hover {
+        background: url(../imgs/page/homepage6/next.svg) no-repeat center;
+    }
+}
+.sale-tag {
+    background-color: $color-brand-2;
+    padding: 4px;
+    color: $color-white;
+    display: inline-block;
+}
+.home6-style {
+    .card-grid-inner {
+        padding: 0px;
+        .image-box {
+            background-color: #f7f7f7;
+            padding: 20px;
+            line-height: 218px;
+            height: 250px;
+            .label {
+                top: 15px;
+                left: 15px;
+            }
+        }
+        .info-right {
+            padding: 0px 20px 20px 20px;
+        }
+    }
+    .price-info {
+        display: block;
+    }
+    .box-btn-cart {
+        display: none;
+    }
+    &:hover {
+        .price-info {
+            display: none;
+        }
+        .box-btn-cart {
+            display: block;
+        }
+    }
+}
+.banner-bottom-1 {
+    width: 100%;
+    height: 265px;
+    background: url(../imgs/page/homepage6/reading-table.png) no-repeat center;
+    margin-bottom: 30px;
+    display: inline-block;
+    background-size: cover;
+    position: relative;
+}
+.banner-bottom-2 {
+    width: 100%;
+    height: 265px;
+    background: url(../imgs/page/homepage6/table-lamp.png) no-repeat center;
+    margin-bottom: 30px;
+    display: inline-block;
+    background-size: cover;
+    position: relative;
+}
+.banner-bottom-3 {
+    width: 100%;
+    height: 566px;
+    background: url(../imgs/page/homepage6/top-rate.png) no-repeat center;
+    margin-bottom: 30px;
+    display: inline-block;
+    background-size: cover;
+    position: relative;
+}
+.banner-bottom-4 {
+    width: 100%;
+    height: 265px;
+    background: url(../imgs/page/homepage6/sofa.png) no-repeat center;
+    margin-bottom: 30px;
+    display: inline-block;
+    background-size: cover;
+    position: relative;
+}
+.banner-bottom-5 {
+    width: 100%;
+    height: 265px;
+    background: url(../imgs/page/homepage6/relax.png) no-repeat center;
+    margin-bottom: 30px;
+    display: inline-block;
+    background-size: cover;
+    position: relative;
+}
+.top-style-1 {
+    position: absolute;
+    top: 35%;
+    left: 40px;
+}
+.top-style-2 {
+    position: absolute;
+    top: 20%;
+    left: 40px;
+}
+.banner-ads-3 {
+    background-color: $background-bg-5;
+    border-radius: 4px;
+    padding: 25px 35px;
+    background-image: url(../imgs/page/homepage6/chair.png);
+    background-repeat: no-repeat;
+    background-position: bottom right 5px;
+    max-width: 886px;
+    margin: auto;
+}

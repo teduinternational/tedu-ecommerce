@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="msapplication-TileColor" content="#0E0E0E">
+    <meta name="template-color" content="#0E0E0E">
+    <meta name="description" content="Index page">
+    <meta name="keywords" content="index, page">
+    <meta name="author" content="">
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/imgs/template/favicon.svg">
+    <link href="/assets/css/style.css?v=3.0.0" rel="stylesheet">
+    @RenderSection("styles",required:false)
+    <title>TEDU Ecommerce</title>
+</head>
+<body>
+    <vc:header></vc:header>
+    <main class="main">
+        @RenderBody()
+    </main>
+     <vc:footer></vc:footer>
+    <script src="/assets/js/vendors/modernizr-3.6.0.min.js"></script>
+    <script src="/assets/js/vendors/jquery-3.6.0.min.js"></script>
+    <script src="/assets/js/vendors/jquery-migrate-3.3.0.min.js"></script>
+    <script src="/assets/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/vendors/waypoints.js"></script>
+    <script src="/assets/js/vendors/wow.js"></script>
+    <script src="/assets/js/vendors/magnific-popup.js"></script>
+    <script src="/assets/js/vendors/perfect-scrollbar.min.js"></script>
+    <script src="/assets/js/vendors/select2.min.js"></script>
+    <script src="/assets/js/vendors/isotope.js"></script>
+    <script src="/assets/js/vendors/scrollup.js"></script>
+    <script src="/assets/js/vendors/swiper-bundle.min.js"></script>
+    <script src="/assets/js/vendors/noUISlider.js"></script>
+    <script src="/assets/js/vendors/slider.js"></script>
+    <!-- Count down-->
+    <script src="/assets/js/vendors/counterup.js"></script>
+    <script src="/assets/js/vendors/jquery.countdown.min.js"></script>
+    <!-- Count down-->
+    <script src="/assets/js/vendors/jquery.elevatezoom.js"></script>
+    <script src="/assets/js/vendors/slick.js"></script>
+    <script src="/assets/js/main.js?v=3.0.0"></script>
+    <script src="/assets/js/shop.js?v=1.2.1"></script>
+    @RenderSection("scripts",required:false)
+</body>
+</html>

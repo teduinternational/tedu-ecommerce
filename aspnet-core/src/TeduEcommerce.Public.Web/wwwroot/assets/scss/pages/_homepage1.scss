@@ -1,0 +1,221 @@
+.list-brands {
+    display: flex;
+    width: 100%;
+    border: 1px solid $color-border-1;
+    padding: 16px;
+    border-radius: 4px;
+    margin: 10px 0px 0px 0px;
+
+    a {
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 100%;
+
+        img {
+            opacity: 0.3;
+            max-height: 15px;
+        }
+
+        &:hover {
+            img {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+.head-main {
+    display: inline-block;
+    width: 100%;
+    padding: 0px 0px 20px 0px;
+    border-bottom: 1px solid $color-border-1;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.nav-tabs {
+    border-bottom: 0px;
+    padding-top: 40px;
+    display: inline-block;
+    text-align: right;
+    width: 100%;
+    vertical-align: bottom;
+
+    li {
+        display: inline-block;
+        padding: 0px 10px 0px 10px;
+
+        a {
+            display: inline-block;
+            width: 100%;
+            padding: 0px 10px;
+            font-size: $font-md;
+            line-height: 24px;
+            color: $color-gray-500;
+
+            &:hover {
+                color: $color-gray-900;
+                font-weight: 400;
+            }
+
+            &.active {
+                color: $color-gray-900;
+                font-weight: bold;
+            }
+        }
+
+        &:last-child {
+            padding-right: 0px;
+
+            a {
+                padding-right: 0px;
+            }
+        }
+    }
+}
+
+.list-links-disc {
+    display: inline-block;
+    width: 100%;
+    padding: 15px 0px 10px 0px;
+
+    li {
+        margin: 0px 0px 6px 0px;
+        list-style: none;
+        transition: 0.2s;
+        &:hover {
+            padding-left: 2px;
+            transition: 0.2s;
+        }
+        a {
+            display: block;
+            padding: 0px 0px 0px 10px;
+            background: url(../imgs/template/icons/arrow-small.svg) no-repeat left center;
+            color: $color-gray-700;
+
+            &:hover {
+                color: $color-brand-1;
+                background: url(../imgs/template/icons/arrow-small-hover.svg) no-repeat left center;
+            }
+        }
+    }
+}
+
+.image-gallery {
+    display: table;
+    table-layout: fixed;
+    margin: 0px -10px 20px -10px;
+    width: calc(100% + 20px);
+
+    .image-big {
+        float: left;
+        width: 62.5%;
+        padding: 0px 10px;
+    }
+
+    .image-small {
+        float: left;
+        width: 37.5%;
+        padding: 0px 10px;
+    }
+}
+
+.banner-2 {
+    background-color: $background-bg-8;
+    padding: 40px 30px;
+    height: 470px;
+    margin-bottom: 25px;
+}
+
+.bg-xbox {
+    background-image: url(../imgs/page/homepage1/xbox.png);
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: 260px;
+    border-radius: 4px;
+}
+
+.banner-img-left {
+    background-color: $background-bg-9;
+    padding: 20px 20px 0px 220px;
+    height: 225px;
+}
+
+.bg-controller {
+    background-image: url(../imgs/page/homepage1/controller.png);
+    background-repeat: no-repeat;
+    background-position: bottom left 10px;
+    background-size: auto 80%;
+    border-radius: 4px;
+}
+
+.bg-metaverse {
+    background-color: $background-bg-2;
+    padding: 50px 30px 0px 30px;
+    height: 225px;
+    background-image: url(../imgs/page/homepage1/metaverse.png);
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: auto 80%;
+    border-radius: 4px;
+}
+
+.bg-electronic {
+    background-color: $background-bg-6;
+    padding: 30px 30px 0px 30px;
+    text-align: center;
+    height: 225px;
+    background-image: url(../imgs/page/homepage1/electronic.png);
+    background-repeat: no-repeat;
+    background-position: bottom 5px center;
+    background-size: auto 45%;
+    border-radius: 4px;
+}
+
+.bg-phone {
+    background-color: $background-bg-10;
+    padding: 30px 200px 30px 30px;
+    height: 225px;
+    background-image: url(../imgs/page/homepage1/phone.png);
+    background-repeat: no-repeat;
+    background-position: bottom right 10px;
+    background-size: auto 75%;
+    border-radius: 4px;
+}
+
+.select2-dropdown {
+    border: 1px solid #ececec;
+    border-radius: 0 0 4px 4px;
+    padding: 15px;
+    min-width: 220px;
+    top: 8px;
+}
+
+.block-drone {
+    background-image: url(../imgs/page/homepage1/drone.png);
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    padding: 25px 200px 25px 35px;
+    background-size: auto 150px;
+    height: 250px;
+}
+
+.block-samsung {
+    background-image: url(../imgs/page/homepage1/samsung.png);
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    padding: 25px 200px 25px 35px;
+    background-size: auto 220px;
+    height: 250px;
+}
+
+.block-iphone {
+    background-image: url(../imgs/page/homepage1/iphone-12.png);
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    padding: 25px 35px 25px 35px;
+    background-size: auto 160px;
+    height: 250px;
+}

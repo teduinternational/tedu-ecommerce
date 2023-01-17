@@ -1,0 +1,84 @@
+/***
+ Theme Name: Ecom
+ Description: Multipurpose Marketplace HTML Template + RTL
+ Version: 3.0
+ License: GNU General Public License v2 or later
+ License URI: http://www.gnu.org/licenses/gpl-2.0.html
+==============================
+TABLE CONTENT
+ Import Google Fonts
+ Include Third Party CSS Library
+ GENERAL
+ HEADER
+ Offcanvas Sidebar
+ Search form
+ Main header
+ Mega menu
+ Header layouts
+ Page layouts
+ Pagination
+ Breadcrumb
+ CATEGORY PAGES
+ SINGLE POST
+ Author box
+ comment
+ Post share social
+ WP STYPE
+ Custom amine
+***/
+
+// Configuration and helpers
+@import 'abstracts/variables',
+'abstracts/functions',
+'abstracts/mixins';
+// Vendors
+@import 'vendors/vendors-import';
+// Base stuff
+@import 'base/common',
+'base/animation',
+'base/typography';
+// Components
+@import 'components/buttons', 'components/form',
+'components/slider', 'components/noUISlider',
+'components/card',
+'components/tabs',
+'components/misc',
+'components/banners';
+// Themes
+@import 'themes/default';
+// Layout-related sections
+@import 'layout/header',
+'layout/navigation',
+'layout/sidebar',
+'layout/footer',
+'layout/spacing';
+// Page-specific styles
+@import 'pages/homepage1',
+'pages/homepage2',
+'pages/homepage3',
+'pages/homepage4',
+'pages/homepage5',
+'pages/homepage6',
+'pages/homepage7',
+'pages/homepage8',
+'pages/homepage9',
+'pages/homepage10',
+'pages/shoplist',
+'pages/single-product',
+'pages/wishlist',
+'pages/cart',
+'pages/checkout',
+'pages/compare',
+'pages/blogs',
+'pages/vendor',
+'pages/account',
+'pages/about',
+'pages/shopgrid';
+// Responsive
+@import 'layout/responsive';
+
+.page-content {
+    p   {
+        margin-bottom: 15px;
+    }
+}

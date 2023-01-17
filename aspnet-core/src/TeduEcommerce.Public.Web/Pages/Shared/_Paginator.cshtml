@@ -1,0 +1,66 @@
+﻿@model TeduEcommerce.Public.PagedResultBase
+@{
+    var urlTemplate = Url.Action() + "?page={0}";
+    var request = ViewContext.HttpContext.Request;
+    foreach (var key in request.Query.Keys)
+    {
+        if (key == "page")
+        {
+            continue;
+        }
+        if (request.Query[key].Count > 1)
+        {
+            foreach (var item in (string[])request.Query[key])
+            {
+                urlTemplate += "&" + key + "=" + item;
+            }
+        }
+        else
+        {
+            urlTemplate += "&" + key + "=" + request.Query[key];
+        }
+    }
+    var startIndex = Math.Max(Model.CurrentPage - 5, 1);
+    var finishIndex = Math.Min(Model.CurrentPage + 5, Model.PageCount);
+}
+<nav>
+    @if (Model.PageCount > 0)
+    {
+        <ul class="pagination">
+            @if (Model.CurrentPage != startIndex)
+            {
+                <li class="page-item">
+                    <a class="page-link page-prev" href="@urlTemplate.Replace("{0}", Model.PageCount.ToString())" aria-label="Trước" title="Trang @Model.CurrentPage.ToString()">
+                        <span aria-hidden="true"><i class="la la-arrow-left"></i></span>
+                        <span class="sr-only">Trước</span>
+                    </a>
+                </li>
+            }
+            @for (var i = startIndex; i <= finishIndex; i++)
+            {
+                if (i == Model.CurrentPage)
+                {
+                    <li class="page-item active"><a class="page-link" href="#">@i</a></li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a class="page-link" href="@urlTemplate.Replace("{0}", i.ToString())" title="Trang @i.ToString()">@i</a>
+                    </li>
+                }
+            }
+
+            @if (Model.CurrentPage != finishIndex)
+            {
+                <li class="page-item">
+                    <a class="page-link page-next" href="@urlTemplate.Replace("{0}", Model.PageCount.ToString())" aria-label="Sau" title="@Model.PageCount.ToString()">
+                        <span aria-hidden="true"><i class="la la-arrow-right"></i></span>
+                        <span class="sr-only">Sau</span>
+                    </a>
+                </li>
+            }
+
+        </ul>
+    }
+
+</nav>

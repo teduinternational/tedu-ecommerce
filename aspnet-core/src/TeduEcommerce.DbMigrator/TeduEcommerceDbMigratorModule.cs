@@ -1,4 +1,5 @@
-﻿using TeduEcommerce.EntityFrameworkCore;
+﻿using TeduEcommerce.Admin;
+using TeduEcommerce.EntityFrameworkCore;
 using Volo.Abp.Autofac;
 using Volo.Abp.BackgroundJobs;
 using Volo.Abp.Modularity;

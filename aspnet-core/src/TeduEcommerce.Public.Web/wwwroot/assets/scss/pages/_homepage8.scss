@@ -1,0 +1,164 @@
+.banner-8 {
+    .swiper-pagination-custom {
+        bottom: 20px;
+        padding-left: 50px;
+    }
+    .box-banner-big {
+        h1 {
+            line-height: 63px;
+        }   
+    }
+}
+.height-100 {
+    height: 100% !important;
+}
+.block-sale-2  {
+    background-color: $background-bg-9;
+    border-radius: 4px;
+    padding: 20px 20px 0px 20px;
+    position: relative;
+    overflow: hidden;
+    height: 220px;
+    img {
+        display: block;
+    }
+    .box-sale {
+        h4 {
+            line-height: 26px;
+        }
+    }
+    &.circle-1 {
+        * {
+            position: relative;
+            z-index: 2;
+        }
+        &::before {
+            content: "";
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 40px;
+            left: 0px;
+            background: url(../imgs/page/homepage8/bg-sale1.png) no-repeat bottom right;
+            z-index: 1;
+        }
+    }
+    &.circle-2 {
+        * {
+            position: relative;
+            z-index: 2;
+        }
+        &::before {
+            content: "";
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 40px;
+            left: 0px;
+            background: url(../imgs/page/homepage8/bg-sale2.png) no-repeat bottom right;
+            z-index: 1;
+        }
+    }
+    &.circle-3 {
+        * {
+            position: relative;
+            z-index: 2;
+        }
+        &::before {
+            content: "";
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            top: 40px;
+            left: 0px;
+            background: url(../imgs/page/homepage8/bg-sale3.png) no-repeat bottom right;
+            z-index: 1;
+        }
+    }
+}
+.block-sale-3 {
+    background-color: $background-bg-28;
+    border-radius: 4px;
+    padding: 20px 20px 0px 20px;
+    position: relative;
+    overflow: hidden;
+    height: 260px;
+}
+.style-label-right {
+    .card-grid-style-2 {
+        > .label {
+            left: auto;
+            right: 15px;
+            position: absolute;
+            top: 10px;
+            z-index: 2;
+            border-radius: 30px;
+            padding: 4px 10px;
+            color: #ffffff;
+            font-size: 12px;
+            line-height: 12px;
+            background-color: $color-brand-2;
+        }
+    }
+}
+.pick-by-ecom .top-deals .card-grid-inner .image-box .swiper-container {
+    padding-bottom: 20px;
+}
+.pick-by-ecom {
+    max-width: 1100px;
+    margin: auto;
+    position: relative;
+}
+.swiper-pagination-3 {
+    text-align: center;
+    bottom: -10px;
+    &.swiper-pagination .swiper-pagination-customs {
+        background-color: $color-white;
+    }
+    &.swiper-pagination .swiper-pagination-customs-active {
+        background-color: $color-brand-2;
+    }
+}
+.swiper-button-next-ecom {
+    position: absolute;
+    top: 50%;
+    right: -75px;
+    margin-top: -28px;
+    background: url(../imgs/page/homepage8/next.svg) no-repeat center;
+    height: 56px;
+    width: 56px;
+    &:hover {
+        background: url(../imgs/page/homepage8/next.svg) no-repeat center;
+    }
+}
+.swiper-button-prev-ecom {
+    position: absolute;
+    top: 50%;
+    margin-top: -28px;
+    left: -75px;
+    background: url(../imgs/page/homepage8/prev.svg) no-repeat center;
+    height: 56px;
+    width: 56px;
+    &:hover {
+        background: url(../imgs/page/homepage8/prev.svg) no-repeat center;
+    }
+}
+.box-ads-3 {
+    overflow: hidden;
+    min-height: 150px;
+    max-height: 170px;
+    &::before {
+        background: url(../imgs/page/homepage8/bg-trans.png);
+    }
+    img {
+        height: 100%;
+        max-width: none;
+    }
+}
+.bg-newsletter-home8 {
+    background-image: url(../imgs/page/homepage8/bg-newsletter.png);
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    padding-bottom: 200px;
+    padding-top: 60px;
+}
