@@ -1,6 +1,11 @@
 ﻿@model TeduEcommerce.Public.Products.ProductInListDto
+@using TeduEcommerce.Public.Products;
+@inject IProductsAppService _productsAppService;
 @{
     var url = $"/products/{Model.CategorySlug}/{Model.Slug}.html";
+    var fileContent = await _productsAppService.GetThumbnailImageAsync(Model.ThumbnailPicture);
+    var base64Image = TeduEcommerce.Helpers.ImageHelper.ShowBase64(Model.ThumbnailPicture, fileContent);
+
 }
 <div class="card-grid-style-3">
     <div class="card-grid-inner">
@@ -12,10 +17,10 @@
         </div>
         <div class="image-box">
             @*<span class="label bg-brand-2">-17%</span>*@
-            <a href="@url"><img src="/assets/imgs/page/homepage1/imgsp3.png" alt="Ecom"></a>
+            <a href="@url"><img src="@base64Image" alt="@Model.Name"></a>
         </div>
         <div class="info-right">
-            <a class="font-xs color-gray-500" href="/manufacture/@(Model.ManufacturerId).html">@Model.ManufacturerId</a><br>
+            <a class="font-xs color-gray-500" href="/manufacture/@(Model.ManufacturerId).html">Manufacture</a><br>
             <a class="color-brand-3 font-sm-bold" href="@url">@Model.Name</a>
             <div class="rating">
                 <img src="/assets/imgs/template/icons/star.svg" alt="Ecom">
