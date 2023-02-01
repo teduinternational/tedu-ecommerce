@@ -44,7 +44,7 @@
                                             <div class="product-info">
                                                 <a href="shop-single-product.html">
                                                     <h6 class="color-brand-3">@Model.CartItems[i].Product.Name</h6>
-                                                    <input hidden asp-for="@Model.CartItems[i].Product.Id" class="form-control"/>
+                                                    <input hidden asp-for="@Model.CartItems[i].Product.Id" class="form-control" />
 
                                                 </a>
                                                 <div class="rating"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><img src="assets/imgs/template/icons/star.svg" alt="Ecom"><span class="font-xs color-gray-500"> (65)</span></div>
@@ -114,7 +114,7 @@
                         <div class="row">
                             <div class="col-6"><span class="font-md-bold color-gray-500">Subtotal</span></div>
                             <div class="col-6 text-end">
-                                <h4>	@Model.CartItems.Sum(x=>x.Product.SellPrice)</h4>
+                                <h4>	@Model.CartItems.Sum(x=>x.Product.SellPrice * x.Quantity)</h4>
                             </div>
                         </div>
                     </div>
@@ -138,7 +138,7 @@
                         <div class="row">
                             <div class="col-6"><span class="font-md-bold color-gray-500">Total</span></div>
                             <div class="col-6 text-end">
-                                <h4>	@Model.CartItems.Sum(x=>x.Product.SellPrice)</h4>
+                                <h4>	@Model.CartItems.Sum(x=>x.Product.SellPrice * x.Quantity)</h4>
                             </div>
                         </div>
                     </div>
