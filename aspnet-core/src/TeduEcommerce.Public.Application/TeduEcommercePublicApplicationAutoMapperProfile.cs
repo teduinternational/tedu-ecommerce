@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using TeduEcommerce.Manufacturers;
+using TeduEcommerce.Orders;
 using TeduEcommerce.ProductAttributes;
 using TeduEcommerce.ProductCategories;
 using TeduEcommerce.Products;
 using TeduEcommerce.Public.Manufacturers;
+using TeduEcommerce.Public.Orders;
 using TeduEcommerce.Public.ProductAttributes;
 using TeduEcommerce.Public.ProductCategories;
 using TeduEcommerce.Public.Products;
@@ -28,5 +30,8 @@ public class TeduEcommercePublicApplicationAutoMapperProfile : Profile
         //Product attribute
         CreateMap<ProductAttribute, ProductAttributeDto>();
         CreateMap<ProductAttribute, ProductAttributeInListDto>();
+
+        //Order
+        CreateMap<Order, OrderDto>();
     }
 }

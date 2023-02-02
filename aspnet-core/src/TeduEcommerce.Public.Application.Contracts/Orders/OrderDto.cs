@@ -1,22 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using Volo.Abp.Domain.Entities.Auditing;
+using TeduEcommerce.Orders;
+using Volo.Abp.Application.Dtos;
 
-namespace TeduEcommerce.Orders
+namespace TeduEcommerce.Public.Orders
 {
-    public class Order : FullAuditedAggregateRoot<Guid>
+    public class OrderDto : EntityDto<Guid>
     {
-        public Order()
-        {
-
-        }
-        public Order(Guid id)
-        {
-            Id = id;
-        }
         public string Code { get; set; }
         public OrderStatus Status { get; set; }
         public PaymentMethod PaymentMethod { get; set; }
