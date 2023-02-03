@@ -26,7 +26,7 @@ namespace TeduEcommerce.Public.Products
         private readonly IRepository<ProductAttributeDecimal> _productAttributeDecimalRepository;
         private readonly IRepository<ProductAttributeVarchar> _productAttributeVarcharRepository;
         private readonly IRepository<ProductAttributeText> _productAttributeTextRepository;
-
+        private readonly IRepository<Product, Guid> _productRepository;
 
         public ProductsAppService(IRepository<Product, Guid> repository,
             IRepository<ProductCategory> productCategoryRepository,
@@ -36,7 +36,8 @@ namespace TeduEcommerce.Public.Products
               IRepository<ProductAttributeInt> productAttributeIntRepository,
               IRepository<ProductAttributeDecimal> productAttributeDecimalRepository,
               IRepository<ProductAttributeVarchar> productAttributeVarcharRepository,
-              IRepository<ProductAttributeText> productAttributeTextRepository
+              IRepository<ProductAttributeText> productAttributeTextRepository,
+              IRepository<Product, Guid> productRepository
               )
             : base(repository)
         {
@@ -47,6 +48,7 @@ namespace TeduEcommerce.Public.Products
             _productAttributeDecimalRepository = productAttributeDecimalRepository;
             _productAttributeVarcharRepository = productAttributeVarcharRepository;
             _productAttributeTextRepository = productAttributeTextRepository;
+            _productRepository = productRepository;
         }
 
         public async Task<List<ProductInListDto>> GetListAllAsync()
@@ -220,6 +222,12 @@ namespace TeduEcommerce.Public.Products
             var data = await AsyncExecuter.ToListAsync(query);
 
             return ObjectMapper.Map<List<Product>, List<ProductInListDto>>(data);
+        }
+
+        public async Task<ProductDto> GetBySlugAsync(string slug)
+        {
+            var product = await _productRepository.GetAsync(x => x.Slug == slug);
+            return ObjectMapper.Map<Product, ProductDto>(product);
         }
     }
 }
