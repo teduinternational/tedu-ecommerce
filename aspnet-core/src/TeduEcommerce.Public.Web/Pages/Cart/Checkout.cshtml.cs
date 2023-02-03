@@ -1,22 +1,31 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text.Json;
 using System.Threading.Tasks;
+using TeduEcommerce.Emailing;
 using TeduEcommerce.Public.Orders;
 using TeduEcommerce.Public.Web.Extensions;
 using TeduEcommerce.Public.Web.Models;
+using Volo.Abp.Emailing;
+using Volo.Abp.TextTemplating;
 
 namespace TeduEcommerce.Public.Web.Pages.Cart
 {
     public class CheckoutModel : PageModel
     {
         private readonly IOrdersAppService _ordersAppService;
-        public CheckoutModel(IOrdersAppService ordersAppService)
+        private readonly IEmailSender _emailSender;
+        private readonly ITemplateRenderer _templateRenderer;
+        public CheckoutModel(IOrdersAppService ordersAppService, IEmailSender emailSender,
+            ITemplateRenderer templateRenderer)
         {
             _ordersAppService = ordersAppService;
+            _emailSender = emailSender;
+            _templateRenderer = templateRenderer;
         }
         public List<CartItem> CartItems { get; set; }
 
@@ -59,7 +68,22 @@ namespace TeduEcommerce.Public.Web.Pages.Cart
             CartItems = GetCartItems();
 
             if (order != null)
+            {
+                if (User.Identity.IsAuthenticated)
+                {
+                    var email = User.GetSpecificClaim(ClaimTypes.Email);
+                    var emailBody = await _templateRenderer.RenderAsync(
+                        EmailTemplates.CreateOrderEmail,
+                        new
+                        {
+                            message = "Create order success"
+                        });
+                    await _emailSender.SendAsync(email, "Tạo đơn hàng thành công", emailBody);
+                }
+
                 CreateStatus = true;
+            }
+
             else
                 CreateStatus = false;
         }
