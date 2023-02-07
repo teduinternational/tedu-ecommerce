@@ -69,7 +69,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeduEcommerce.Public.Web", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeduEcommerce.Domain.Tests", "test\TeduEcommerce.Domain.Tests\TeduEcommerce.Domain.Tests.csproj", "{E06E7D0C-51F3-497C-BF48-3A32526AD3E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeduEcommerce.BackgroundWorkers", "src\TeduEcommerce.BackgroundWorkers\TeduEcommerce.BackgroundWorkers.csproj", "{ED9766D7-897F-443E-9E9D-6B11F385D0A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeduEcommerce.BackgroundWorkers", "src\TeduEcommerce.BackgroundWorkers\TeduEcommerce.BackgroundWorkers.csproj", "{ED9766D7-897F-443E-9E9D-6B11F385D0A6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B14444BA-5B28-4792-B9B1-6934AC4D3989}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
