@@ -69,6 +69,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeduEcommerce.Public.Web", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeduEcommerce.Domain.Tests", "test\TeduEcommerce.Domain.Tests\TeduEcommerce.Domain.Tests.csproj", "{E06E7D0C-51F3-497C-BF48-3A32526AD3E9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeduEcommerce.BackgroundWorkers", "src\TeduEcommerce.BackgroundWorkers\TeduEcommerce.BackgroundWorkers.csproj", "{ED9766D7-897F-443E-9E9D-6B11F385D0A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -163,6 +165,10 @@ Global
 		{E06E7D0C-51F3-497C-BF48-3A32526AD3E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E06E7D0C-51F3-497C-BF48-3A32526AD3E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E06E7D0C-51F3-497C-BF48-3A32526AD3E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED9766D7-897F-443E-9E9D-6B11F385D0A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED9766D7-897F-443E-9E9D-6B11F385D0A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED9766D7-897F-443E-9E9D-6B11F385D0A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED9766D7-897F-443E-9E9D-6B11F385D0A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -199,6 +205,7 @@ Global
 		{140A1A34-7278-495E-86A2-6582D5B7BA49} = {42079C50-0D57-4885-82E2-2C7CCB4BE635}
 		{6DDD5331-CB31-4A92-8E37-51A3D17C798C} = {42079C50-0D57-4885-82E2-2C7CCB4BE635}
 		{E06E7D0C-51F3-497C-BF48-3A32526AD3E9} = {DC8BB66A-2EDE-43A3-8D59-6B9238D03004}
+		{ED9766D7-897F-443E-9E9D-6B11F385D0A6} = {27EC79A9-42CF-4176-B3BB-697B07AA287B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {28315BFD-90E7-4E14-A2EA-F3D23AF4126F}
