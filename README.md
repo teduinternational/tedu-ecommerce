@@ -1,4 +1,4 @@
-# TEDU Ecommerce solution using ABP Framework + Angular (TEDU-50)
+﻿# TEDU Ecommerce solution using ABP Framework + Angular (TEDU-50)
 
 # Deploy System using Abp Framework
 
@@ -67,60 +67,12 @@ yum -y install mssql-tools unixODBC-devel
 - Run command: sqlcmd -S localhost -U sa
 - Fill passsword
 
-
-### Step 4: Deploy and configure ASP.NET Core application
-- Create a new service and folder
-```
-cd /home/vhost/www
-sudo chown nginx:nginx -R /home/vhost/www/teduecom_admin_api
-sudo vi /etc/systemd/system/teduecom_admin_api.service
-```
-- Edit file teduecom_admin_api.service:
-```
-[Unit]
-Description=TEDU Admin API
-
-[Service]
-WorkingDirectory=/home/vhost/www/teduecom_admin_api
-ExecStart=/usr/bin/dotnet /home/vhost/www/teduecom_admin_api/TeduEcommerce.Admin.HttpApi.Host.dll
-Restart=always
-RestartSec=20 # Restart service after 10 seconds if dotnet service crashes
-SyslogIdentifier=dotnet-teduecom_admin_api
-User=nginx
-Environment=ASPNETCORE_ENVIRONMENT=Production
-
-[Install]
-WantedBy=multi-user.target
-```
-- Start service:
-```
-sudo systemctl start teduecom_admin_api
-sudo systemctl status teduecom_admin_api
-sudo systemctl enable teduecom_admin_api.service
-```
-- Disable Selinux:
-```
-sudo vi /etc/sysconfig/selinux
-```
-- Find SELINUX=enforcing and replace it with SELINUX=disabled
-- Reboot system
-```
-sudo reboot
-```
-- List all servcies with toomva prefix:
-```
-systemctl | grep teduecom
-
-```
-
-### Step 5: Restart service when change config
-```
- sudo systemctl restart teduecom_admin_api
-```
-
-### Step 6: Install nginx
+### Step 5: Install NGINX Server
 ```
 sudo yum install nginx -y
+sudo systemctl start nginx.service
+sudo systemctl enable nginx
+sudo systemctl status nginx.service
 sudo systemctl reload nginx
 ```
 - Go to /etc/nginx/config.d
@@ -153,19 +105,74 @@ server {
 }
 ```
 
-### Step 7: Setup firewall to allow 80 and 443
+### Step 6: Deploy and configure ASP.NET Core application
+- Create a new service and folder
+```
+cd /home/vhost/www
+sudo chown nginx:nginx -R /home/vhost/www/teduecom_auth_server
+sudo vi /etc/systemd/system/teduecom_auth_server.service
+```
+- Edit file teduecom_admin_api.service:
+```
+[Unit]
+Description=TEDU Admin API
+
+[Service]
+WorkingDirectory=/home/vhost/www/teduecom_admin_api
+ExecStart=/usr/bin/dotnet /home/vhost/www/teduecom_admin_api/TeduEcommerce.Admin.HttpApi.Host.dll
+Restart=always
+RestartSec=20 # Restart service after 10 seconds if dotnet service crashes
+SyslogIdentifier=dotnet-teduecom_admin_api
+User=nginx
+Environment=ASPNETCORE_ENVIRONMENT=Production
+
+[Install]
+WantedBy=multi-user.target
+```
+- Start service:
+```
+sudo systemctl start teduecom_admin_api
+sudo systemctl enable teduecom_admin_api.service
+sudo systemctl status teduecom_admin_api
+sudo systemctl restart teduecom_admin_api
+
+```
+- Disable Selinux: Tắt tính năng chặn truy cập trong Linux
+- Lưu và thoát: :wq
+```
+sudo vi /etc/sysconfig/selinux
+```
+- Find SELINUX=enforcing and replace it with SELINUX=disabled
+- Reboot system
+```
+sudo reboot
+```
+- List all servcies with teduecom prefix:
+```
+systemctl | grep teduecom
+
+```
+
+### Step 7: Restart service when change config
+- Update code need restart
+```
+ sudo systemctl restart teduecom_admin_api
+```
+
+
+### Step 8: Setup firewall to allow 80 and 443
 ```
 sudo firewall-cmd --zone=public --permanent --add-service=http
 sudo firewall-cmd --zone=public --permanent --add-service=https
 sudo firewall-cmd --reload
 sudo systemctl enable firewalld.service
 ```
-### Step 8: Run with public IP
+### Step 9: Run with public IP
 
 ## Note:
 - Run add or remove IP in CentOS
 ```
-firewall-cmd --permanent --zone=public --add-port=2222/tcp
+firewall-cmd --permanent --zone=public --add-port=25000/tcp
 firewall-cmd --zone=public --list-ports
-firewall-cmd --permanent --zone=public --remove-port=25/tcp
+sudo firewall-cmd --reload
 ```
