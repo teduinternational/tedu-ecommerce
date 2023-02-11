@@ -34,6 +34,7 @@ using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.UI;
 using Volo.Abp.VirtualFileSystem;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace TeduEcommerce;
 
@@ -61,6 +62,13 @@ public class TeduEcommerceAuthServerModule : AbpModule
                 options.UseAspNetCore();
             });
         });
+        PreConfigure<OpenIddictServerAspNetCoreBuilder>(configure =>
+        {
+            configure.DisableTransportSecurityRequirement();
+            configure.EnableAuthorizationEndpointPassthrough();
+            configure.EnableTokenEndpointPassthrough();
+        });
+
     }
 
     public override void ConfigureServices(ServiceConfigurationContext context)
@@ -193,6 +201,15 @@ public class TeduEcommerceAuthServerModule : AbpModule
         {
             app.UseErrorPage();
         }
+        //Fix HTTPS requirement error
+        // https://github.com/openiddict/openiddict-core/issues/864
+        var forwardedHeaderOptions = new ForwardedHeadersOptions
+        {
+            ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+        };
+        forwardedHeaderOptions.KnownNetworks.Clear();
+        forwardedHeaderOptions.KnownProxies.Clear();
+        app.UseForwardedHeaders(forwardedHeaderOptions);
 
         app.UseCorrelationId();
         app.UseStaticFiles();

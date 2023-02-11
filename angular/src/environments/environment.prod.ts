@@ -1,6 +1,6 @@
 import { Environment } from '@abp/ng.core';
 
-const baseUrl = 'http://localhost:4200';
+const baseUrl = 'http://103.139.102.129:24200';
 
 export const environment = {
   production: true,
@@ -10,16 +10,17 @@ export const environment = {
     logoUrl: '',
   },
   oAuthConfig: {
-    issuer: 'https://localhost:44339/',
+    issuer: 'http://103.139.102.129:25000/',
     redirectUri: baseUrl,
     clientId: 'TeduEcommerce_App',
+    dummyClientSecret:'1q2w3e*',
     responseType: 'code',
     scope: 'offline_access TeduEcommerce',
-    requireHttps: true
+    requireHttps: false
   },
   apis: {
     default: {
-      url: 'https://localhost:44351',
+      url: 'http://103.139.102.129:25100',
       rootNamespace: 'TeduEcommerce',
     },
   },

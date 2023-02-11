@@ -1,0 +1,14 @@
+[Unit]
+Description=TEDU Auth Server
+
+[Service]
+WorkingDirectory=/home/vhost/www/teduecom_auth_server
+ExecStart=/usr/bin/dotnet /home/vhost/www/teduecom_auth_server/TeduEcommerce.AuthServer.dll  --urls http://localhost:5000
+Restart=always
+RestartSec=20 # Restart service after 10 seconds if dotnet service crashes
+SyslogIdentifier=dotnet-teduecom_auth_server
+User=nginx
+Environment=ASPNETCORE_ENVIRONMENT=Production
+
+[Install]
+WantedBy=multi-user.target

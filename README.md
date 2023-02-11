@@ -56,7 +56,6 @@ rpm -qi mssql-server
 sudo /opt/mssql/bin/mssql-conf setup
 sudo systemctl status sqlserver.service
 sudo  firewall-cmd --add-port=1433/tcp --permanent
-sudo  firewall-cmd --add-port=1431/tcp --permanent
 sudo  firewall-cmd --reload
 
 ```
@@ -74,7 +73,7 @@ sudo systemctl status nginx.service
 sudo systemctl reload nginx
 ```
 
-- Setup a new service:
+### Step 6: Create new NGINX configuration:
 1. Go to /etc/nginx/config.d folder
 2. Create a new file teduecom_auth_server.conf
 3. Populate file content:
@@ -104,15 +103,21 @@ server {
     }
 }
 ```
+4. Reload NGINX
+```
+sudo systemctl reload nginx
+```
 
-### Step 6: Deploy and configure ASP.NET Core application
+### Step 7: Deploy and configure ASP.NET Core application
 - Create a new service and folder /home/vhost/www
 ```
 cd /home/vhost/www
 sudo chown nginx:nginx -R /home/vhost/www/teduecom_auth_server
 sudo vi /etc/systemd/system/teduecom_auth_server.service
 ```
+- Upload file
 
+### Step 8: Create new Linux Service
 - Edit file teduecom_auth_server.service.conf:
 ```
 [Unit]
@@ -120,7 +125,7 @@ Description=TEDU Auth Server
 
 [Service]
 WorkingDirectory=/home/vhost/www/teduecom_auth_server
-ExecStart=/usr/bin/dotnet /home/vhost/www/teduecom_auth_server/TeduEcommerce.AuthServer.dll
+ExecStart=/usr/bin/dotnet /home/vhost/www/teduecom_auth_server/TeduEcommerce.AuthServer.dll  --urls http://localhost:5000
 Restart=always
 RestartSec=20 # Restart service after 10 seconds if dotnet service crashes
 SyslogIdentifier=dotnet-teduecom_admin_api
@@ -136,9 +141,42 @@ WantedBy=multi-user.target
 sudo systemctl start teduecom_auth_server
 sudo systemctl enable teduecom_auth_server.service
 sudo systemctl status teduecom_auth_server
-sudo systemctl restart teduecom_auth_server
-
 ```
+- Change service config:
+```
+systemctl daemon-reload
+sudo systemctl restart teduecom_auth_server
+```
+- List all servcies with teduecom prefix:
+```
+systemctl | grep teduecom
+```
+
+
+### Step 9: Setup firewall to allow 80 and 443
+```
+sudo firewall-cmd --zone=public --permanent --add-service=http
+sudo firewall-cmd --zone=public --permanent --add-service=https
+sudo firewall-cmd --reload
+sudo systemctl enable firewalld.service
+```
+
+### Step 10: Run with public IP
+
+## Note:
+- Run add or remove IP in CentOS
+```
+firewall-cmd --permanent --zone=public --add-port=25000/tcp
+firewall-cmd --zone=public --list-ports
+sudo firewall-cmd --reload
+firewall-cmd --permanent --zone=public --remove-port=1431/tcp
+```
+
+- Update code need restart
+```
+ sudo systemctl restart teduecom_auth_server
+```
+
 - Disable Selinux: Turn off access management in Linux
 ```
 sudo vi /etc/sysconfig/selinux
@@ -148,33 +186,4 @@ sudo vi /etc/sysconfig/selinux
 - Reboot system
 ```
 sudo reboot
-```
-
-- List all servcies with teduecom prefix:
-```
-systemctl | grep teduecom
-```
-
-
-### Step 8: Setup firewall to allow 80 and 443
-```
-sudo firewall-cmd --zone=public --permanent --add-service=http
-sudo firewall-cmd --zone=public --permanent --add-service=https
-sudo firewall-cmd --reload
-sudo systemctl enable firewalld.service
-```
-
-### Step 8: Run with public IP
-
-## Note:
-- Run add or remove IP in CentOS
-```
-firewall-cmd --permanent --zone=public --add-port=25000/tcp
-firewall-cmd --zone=public --list-ports
-sudo firewall-cmd --reload
-```
-
-- Update code need restart
-```
- sudo systemctl restart teduecom_auth_server
 ```
