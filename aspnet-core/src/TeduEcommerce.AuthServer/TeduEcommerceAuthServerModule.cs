@@ -61,12 +61,11 @@ public class TeduEcommerceAuthServerModule : AbpModule
                 options.UseLocalServer();
                 options.UseAspNetCore();
             });
-        });
-        PreConfigure<OpenIddictServerAspNetCoreBuilder>(configure =>
-        {
-            configure.DisableTransportSecurityRequirement();
-            configure.EnableAuthorizationEndpointPassthrough();
-            configure.EnableTokenEndpointPassthrough();
+
+            //https://stackoverflow.com/questions/67837798/openiddict-with-dotnet-core-5-giving-the-errors-as-this-server-only-accepts-htt
+            //Fix HTTPS Request
+            builder.AddServer(options => { options.UseAspNetCore().DisableTransportSecurityRequirement(); });
+
         });
 
     }
@@ -201,15 +200,6 @@ public class TeduEcommerceAuthServerModule : AbpModule
         {
             app.UseErrorPage();
         }
-        //Fix HTTPS requirement error
-        // https://github.com/openiddict/openiddict-core/issues/864
-        var forwardedHeaderOptions = new ForwardedHeadersOptions
-        {
-            ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-        };
-        forwardedHeaderOptions.KnownNetworks.Clear();
-        forwardedHeaderOptions.KnownProxies.Clear();
-        app.UseForwardedHeaders(forwardedHeaderOptions);
 
         app.UseCorrelationId();
         app.UseStaticFiles();

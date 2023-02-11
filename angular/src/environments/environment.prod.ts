@@ -12,10 +12,10 @@ export const environment = {
   oAuthConfig: {
     issuer: 'http://103.139.102.129:25000/',
     redirectUri: baseUrl,
-    clientId: 'TeduEcommerce_App',
+    clientId: 'TeduEcommerce_Admin',
     dummyClientSecret:'1q2w3e*',
     responseType: 'code',
-    scope: 'offline_access TeduEcommerce',
+    scope: 'offline_access TeduEcommerce.Admin',
     requireHttps: false
   },
   apis: {
