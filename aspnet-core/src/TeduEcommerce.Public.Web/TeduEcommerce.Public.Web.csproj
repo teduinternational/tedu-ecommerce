@@ -344,4 +344,12 @@
     <PackageReference Include="Volo.Abp.SettingManagement.Web" Version="6.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="appsettings.Production.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

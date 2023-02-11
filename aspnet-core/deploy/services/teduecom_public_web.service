@@ -1,0 +1,14 @@
+[Unit]
+Description=TEDU Public Web
+
+[Service]
+WorkingDirectory=/home/vhost/www/teduecom_public_web
+ExecStart=/usr/bin/dotnet /home/vhost/www/teduecom_public_web/TeduEcommerce.Public.Web.dll  --urls http://localhost:6001
+Restart=always
+RestartSec=20 # Restart service after 10 seconds if dotnet service crashes
+SyslogIdentifier=dotnet-teduecom_public_web
+User=nginx
+Environment=ASPNETCORE_ENVIRONMENT=Production
+
+[Install]
+WantedBy=multi-user.target
