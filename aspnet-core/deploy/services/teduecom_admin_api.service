@@ -1,0 +1,14 @@
+[Unit]
+Description=TEDU Admin API
+
+[Service]
+WorkingDirectory=/home/vhost/www/teduecom_admin_api
+ExecStart=/usr/bin/dotnet /home/vhost/www/teduecom_admin_api/TeduEcommerce.Admin.HttpApi.Host.dll  --urls http://localhost:5001
+Restart=always
+RestartSec=20 # Restart service after 10 seconds if dotnet service crashes
+SyslogIdentifier=dotnet-teduecom_admin_api
+User=nginx
+Environment=ASPNETCORE_ENVIRONMENT=Production
+
+[Install]
+WantedBy=multi-user.target

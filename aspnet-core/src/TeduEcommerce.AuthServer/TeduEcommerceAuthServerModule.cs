@@ -34,6 +34,7 @@ using Volo.Abp.Modularity;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.UI;
 using Volo.Abp.VirtualFileSystem;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace TeduEcommerce;
 
@@ -60,7 +61,13 @@ public class TeduEcommerceAuthServerModule : AbpModule
                 options.UseLocalServer();
                 options.UseAspNetCore();
             });
+
+            //https://stackoverflow.com/questions/67837798/openiddict-with-dotnet-core-5-giving-the-errors-as-this-server-only-accepts-htt
+            //Fix HTTPS Request
+            builder.AddServer(options => { options.UseAspNetCore().DisableTransportSecurityRequirement(); });
+
         });
+
     }
 
     public override void ConfigureServices(ServiceConfigurationContext context)
